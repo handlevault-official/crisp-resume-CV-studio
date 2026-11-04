@@ -106,3 +106,5 @@ with st.expander("Save or load a backup"):
     st.file_uploader("Load backup", type="json", key="backup_file", on_change=load_backup)
     st.divider()
 st.link_button("☕ Support this tool", "https://ko-fi.com/handlevaultofficial")
+st.divider()
+st.link_button("☕ Support this tool", "https://ko-fi.com/yourname", type="primary")
