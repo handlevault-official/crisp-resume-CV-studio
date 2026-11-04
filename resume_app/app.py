@@ -105,6 +105,5 @@ with st.expander("Save or load a backup"):
     st.download_button("Download backup", json.dumps(backup), "resume-backup.json", "application/json")
     st.file_uploader("Load backup", type="json", key="backup_file", on_change=load_backup)
     st.divider()
-st.link_button("☕ Support this tool", "https://ko-fi.com/handlevaultofficial")
-st.divider()
 st.link_button("☕ Support this tool", "https://ko-fi.com/handlevaultofficial", type="primary")
+st.divider()
