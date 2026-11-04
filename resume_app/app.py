@@ -107,3 +107,38 @@ with st.expander("Save or load a backup"):
     st.divider()
 st.link_button("☕ Support this tool", "https://ko-fi.com/handlevaultofficial", type="primary")
 st.divider()
+st.set_page_config(
+    page_title="Handle Vault Resume Builder",
+    page_icon="📄",
+    layout="wide"
+)
+
+# Custom CSS para sa mas magandang background at card styles
+st.markdown("""
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    div.stButton > button {
+        background-color: #4f46e5;
+        color: white;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        border: none;
+    }
+    div.stButton > button:hover {
+        background-color: #4338ca;
+        color: white;
+    }
+    </style>
+""", unsafe_allow_html=True)
+with st.sidebar:
+    st.header("⚙️ Settings")
+    template = st.selectbox("Template", ["Modern", "Classic", "Minimal"])
+    accent_color = st.color_picker("Accent Color", "#4f46e5")
+    st.divider()
+    st.info("Tip: Fill in your details on the main panel to generate your resume instantly.")
+    st.title("📄 Handle Vault Resume Builder")
+st.markdown("### *Build a clean, professional, and ATS-friendly resume in minutes.*")
+st.write("---")
