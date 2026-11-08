@@ -1,3 +1,3 @@
-git add index.html
-git commit -m "Upgrade resume builder with multi-style theme switcher and professional design"
-git push origin main
+git branch -m main main
+git fetch origin
+git branch -u origin/main main
