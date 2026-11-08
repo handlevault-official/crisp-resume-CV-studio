@@ -3,184 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crisp Resume Builder</title>
+    <title>Crisp Resume Builder | HandleVault</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --border: #e2e8f0;
+            --accent-bg: #f8fafc;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-            padding: 20px;
+        /* Style Themes */
+        body.theme-corporate {
+            --primary: #0f172a;
+            --primary-hover: #334155;
+            --accent-bg: #f1f5f9;
+        }
+        body.theme-developer {
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --accent-bg: #f0f9ff;
+        }
+        body.theme-executive {
+            --primary: #78350f;
+            --primary-hover: #451a03;
+            --accent-bg: #fffbeb;
         }
 
-        header {
-            max-width: 1200px;
-            margin: 0 auto 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #38bdf8;
-            padding-bottom: 15px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); color: var(--text-main); padding: 20px; min-height: 100vh; transition: background 0.3s; }
+        
+        header { max-width: 1200px; margin: 0 auto 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h1 { color: var(--text-main); font-size: 22px; letter-spacing: -0.5px; }
+        .sub-header { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .kofi-link { background: #ff5e5b; color: #fff; text-decoration: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; font-size: 13px; transition: background 0.2s; }
+        .kofi-link:hover { background: #e04845; }
+        
+        .btn { background: var(--primary); color: #fff; border: none; padding: 9px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+        .btn:hover { background: var(--primary-hover); }
 
-        h1 {
-            color: #38bdf8;
-            font-size: 22px;
-            letter-spacing: 1px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        
+        /* Editor Panel */
+        .editor-card { background: var(--card-bg); padding: 24px; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 16px; height: fit-content; }
+        .section-title { color: var(--primary); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .style-selector { display: flex; gap: 6px; margin-bottom: 4px; }
+        .style-btn { background: var(--border); border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; color: var(--text-main); }
+        .style-btn.active { background: var(--primary); color: #fff; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+        .input-group { display: flex; flex-direction: column; gap: 6px; }
+        label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+        input, textarea, select { background: var(--accent-bg); border: 1px solid var(--border); color: var(--text-main); padding: 10px; border-radius: 6px; font-size: 13px; width: 100%; font-family: inherit; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+        
+        /* Live Resume Sheet Preview */
+        .preview-card { background: #ffffff; color: #0f172a; padding: 40px; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.05); min-height: 700px; }
+        .pv-name { font-size: 28px; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: -0.5px; }
+        .pv-title { font-size: 15px; color: var(--primary); font-weight: 600; margin-bottom: 6px; }
+        .pv-contact { font-size: 12px; color: #475569; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #0f172a; }
+        .pv-section { margin-bottom: 20px; }
+        .pv-section-h2 { font-size: 13px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 8px; }
+        .pv-text { font-size: 13.5px; line-height: 1.6; color: #334155; white-space: pre-line; }
 
-        /* Editor Section */
-        .editor-card {
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #334155;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            height: fit-content;
-        }
-
-        .section-title {
-            color: #ffdd00;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-bottom: 1px dashed #334155;
-            padding-bottom: 5px;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        label {
-            font-size: 11px;
-            text-transform: uppercase;
-            color: #94a3b8;
-            font-weight: bold;
-        }
-
-        input, textarea {
-            background: #0f172a;
-            border: 1px solid #334155;
-            color: #fff;
-            padding: 9px;
-            border-radius: 6px;
-            font-size: 13px;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #38bdf8;
-        }
-
-        /* Live Preview Sheet */
-        .preview-card {
-            background: #ffffff;
-            color: #1e293b;
-            padding: 35px;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            min-height: 600px;
-        }
-
-        .pv-name {
-            font-size: 26px;
-            font-weight: bold;
-            color: #0f172a;
-            text-transform: uppercase;
-        }
-
-        .pv-title {
-            font-size: 14px;
-            color: #0284c7;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .pv-contact {
-            font-size: 12px;
-            color: #64748b;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .pv-section {
-            margin-bottom: 18px;
-        }
-
-        .pv-section-h2 {
-            font-size: 13px;
-            font-weight: bold;
-            color: #0f172a;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid #cbd5e1;
-            padding-bottom: 4px;
-            margin-bottom: 8px;
-        }
-
-        .pv-text {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #334155;
-            white-space: pre-line;
-        }
-
-        .btn {
-            background: #38bdf8;
-            color: #0f172a;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn:hover {
-            background: #7dd3fc;
-        }
+        footer { max-width: 1200px; margin: 30px auto 0; text-align: center; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 15px; }
+        footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
 
         @media print {
             body { background: #fff; padding: 0; }
-            header, .editor-card { display: none !important; }
+            header, .editor-card, footer { display: none !important; }
             .container { display: block; }
-            .preview-card { box-shadow: none; padding: 0; border-radius: 0; }
+            .preview-card { border: none; box-shadow: none; padding: 0; border-radius: 0; }
         }
     </style>
 </head>
-<body>
+<body class="theme-developer">
 
     <header>
         <div>
             <h1>CRISP RESUME BUILDER</h1>
-            <p style="font-size: 12px; color: #94a3b8;">ATS-Friendly Live Resume Generator</p>
+            <div class="sub-header">Professional Multi-Style Live ATS Resume Generator</div>
         </div>
-        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+        <div class="header-actions">
+            <a href="https://ko-fi.com/Handlevaultofficial" target="_blank" class="kofi-link">☕ Support on Ko-fi</a>
+            <button class="btn" onclick="window.print()">Print / Save PDF</button>
+        </div>
     </header>
 
     <div class="container">
         <!-- Input Form -->
         <div class="editor-card">
-            <div class="section-title">Personal Details</div>
+            <div class="section-title">
+                <span>Layout & Theme Style</span>
+            </div>
+            <div class="style-selector">
+                <button class="style-btn" onclick="setTheme('corporate', this)">Corporate</button>
+                <button class="style-btn active" onclick="setTheme('developer', this)">Modern Dev</button>
+                <button class="style-btn" onclick="setTheme('executive', this)">Executive</button>
+            </div>
+
+            <div class="section-title" style="margin-top: 10px;">Personal Details</div>
             <div class="input-group">
                 <label>Full Name</label>
                 <input type="text" id="inName" value="April Arenas" oninput="updatePreview()">
@@ -190,7 +117,7 @@
                 <input type="text" id="inTitle" value="Indie Game Developer & Web Creator" oninput="updatePreview()">
             </div>
             <div class="input-group">
-                <label>Contact Info (Email, Phone, Location, GitHub)</label>
+                <label>Contact Info (Email, Location, GitHub)</label>
                 <input type="text" id="inContact" value="contact@handlevault.com | Baguio City, PH | github.com/handlevault-official" oninput="updatePreview()">
             </div>
 
@@ -199,10 +126,10 @@
                 <textarea id="inSummary" rows="3" oninput="updatePreview()">Passionate developer specializing in pixel art asset creation, lightweight web tools, and interactive applications. Experienced in vanilla web stack deployment and game design assets.</textarea>
             </div>
 
-            <div class="section-title">Experience & Projects</div>
+            <div class="section-title">Experience & Key Projects</div>
             <div class="input-group">
                 <textarea id="inExperience" rows="5" oninput="updatePreview()">• Founder & Lead Creator — HandleVault Studios (2026 - Present)
-  Created Crisp Suite tools including Pixel Art Converter, Invoice Generator, and Bead Pattern Maker.
+  Created Crisp Suite tools including Pixel Art Scaler, Invoice Generator, and Bead Pattern Maker.
 
 • Creator — FarmVoice-AI Project
   Developed and deployed AI tools with integrated machine learning capabilities.</textarea>
@@ -214,7 +141,7 @@
             </div>
         </div>
 
-        <!-- Live Resume Sheet -->
+        <!-- Live Resume Sheet Preview -->
         <div class="preview-card">
             <div class="pv-name" id="outName">April Arenas</div>
             <div class="pv-title" id="outTitle">Indie Game Developer & Web Creator</div>
@@ -226,16 +153,20 @@
             </div>
 
             <div class="pv-section">
-                <div class="pv-section-h2">Experience & Key Projects</div>
+                <div class="pv-section-h2">Experience & Projects</div>
                 <div class="pv-text" id="outExperience"></div>
             </div>
 
             <div class="pv-section">
-                <div class="pv-section-h2">Skills & Technical Proficiencies</div>
+                <div class="pv-section-h2">Skills & Technologies</div>
                 <div class="pv-text" id="outSkills"></div>
             </div>
         </div>
     </div>
+
+    <footer>
+        Crisp Suite by <a href="https://ko-fi.com/Handlevaultofficial" target="_blank">HandleVault</a> — Clean, Fast & Single-File Utilities.
+    </footer>
 
     <script>
         function updatePreview() {
@@ -245,6 +176,12 @@
             document.getElementById('outSummary').textContent = document.getElementById('inSummary').value;
             document.getElementById('outExperience').textContent = document.getElementById('inExperience').value;
             document.getElementById('outSkills').textContent = document.getElementById('inSkills').value;
+        }
+
+        function setTheme(themeName, btn) {
+            document.body.className = 'theme-' + themeName;
+            document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         }
 
         updatePreview();
