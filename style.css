@@ -1,18 +1,18 @@
-/* Sailor Moon Theme Styling */
+/* --- Sailor Moon Container Theme --- */
 .sailor-container {
-    background: #fff0f5; /* Light pink magical background */
+    background: #fff0f5; /* Light pastel pink background */
     border: 3px solid #ff69b4; /* Hot pink magical border */
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.25);
 }
 
-/* Minimalist / No-fill Load & Save buttons */
+/* --- 1. Load at Save Draft Buttons (Minimalist / Transparent, Walang solid fill) --- */
 .btn-clean {
     background: transparent;
     color: #ff1493; /* Deep pink text */
     border: 2px solid #ff69b4;
-    padding: 8px 16px;
+    padding: 8px 18px;
     border-radius: 20px; /* Rounded magical look */
     font-weight: bold;
     cursor: pointer;
@@ -24,14 +24,19 @@
     color: #ffffff;
 }
 
-/* Primary Action Button (tulad ng Share CV o Print) */
+/* --- 2. Share CV at Print / Export PDF Buttons (Magical Gradient) --- */
 .btn-magical {
     background: linear-gradient(135deg, #ffb6c1, #ff69b4);
     color: #ffffff;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 22px;
     border-radius: 20px;
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 3px 10px rgba(255, 105, 180, 0.4);
+    transition: opacity 0.2s ease;
+}
+
+.btn-magical:hover {
+    opacity: 0.9;
 }
