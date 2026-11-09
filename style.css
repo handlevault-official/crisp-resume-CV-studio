@@ -50,3 +50,48 @@
 .btn-magical:hover {
     opacity: 0.9;
 }
+// Save Resume Draft
+function saveResumeDraft() {
+    const resumeData = {
+        fullName: document.getElementById('fullName')?.value || '',
+        summary: document.getElementById('summary')?.value || ''
+    };
+    localStorage.setItem('crisp_resume_draft', JSON.stringify(resumeData));
+    alert('Resume draft saved successfully!');
+}
+
+// Load Resume Draft
+function loadResumeDraft() {
+    const saved = localStorage.getItem('crisp_resume_draft');
+    if (!saved) {
+        alert('No saved resume draft found.');
+        return;
+    }
+    const data = JSON.parse(saved);
+    if (document.getElementById('fullName')) document.getElementById('fullName').value = data.fullName;
+    if (document.getElementById('summary')) document.getElementById('summary').value = data.summary;
+    alert('Resume draft loaded successfully!');
+}
+
+// Print PDF
+function printResumePDF() {
+    window.print();
+}
+
+// Share CV
+function shareMyCV() {
+    const name = document.getElementById('fullName')?.value || 'My Resume';
+    const summary = document.getElementById('summary')?.value || '';
+    const cvText = `RESUME: ${name}\n\nSummary:\n${summary}\n\n(Generated via Crisp Suite)`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: `${name} - CV`,
+            text: cvText,
+            url: window.location.href,
+        }).catch(() => {});
+    } else {
+        navigator.clipboard.writeText(cvText);
+        alert('CV details copied to clipboard!');
+    }
+    }
