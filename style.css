@@ -41,30 +41,8 @@
     opacity: 0.9;
 }
 
-/* Kapag naka-focus o active ang input, susundan nito ang active theme primary color */
-input:focus, select:focus, textarea:focus {
-    border-color: var(--theme-primary, #db2777) !important;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(var(--theme-primary-rgb, 219, 39, 119), 0.15);
-}
-
-/* Para sa mga active borders/outlines */
-.theme-border {
-    border-color: var(--theme-primary, #db2777) !important;
-}
-/* Para masigurong sumusunod ang border at focus ring sa active theme */
 input:focus, select:focus, textarea:focus {
     border-color: var(--theme-primary) !important;
-    box-shadow: 0 0 0 2px var(--theme-primary) !important;
+    box-shadow: none !important;
     outline: none !important;
 }
-
-/* Kung gusto mo ring magkaroon ng kulay ang normal border (hindi naka-focus) base sa theme */
-input, select, textarea {
-    border-color: #cbd5e1; /* default gray border */
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: var(--theme-primary) !important;
-}
-
