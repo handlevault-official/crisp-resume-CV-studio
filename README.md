@@ -22,7 +22,7 @@ If you want to run or test this project locally on your machine, follow these st
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/handlevault-official/crisp-resume-builder.git](https://github.com/handlevault-official/crisp-resume-builder.git)
+   git clone [https://github.com/handlevault-official/crisp-resume-studio.git](https://github.com/handlevault-official/crisp-resume-studio.git)
    
 
 ---
