@@ -32,7 +32,10 @@ function changeTheme(themeName) {
             badge.innerText = "SAILOR MOON EDITION";
             badge.className = "text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold";
         }
-    }// 1. SAVE DRAFT: Isine-save ang mga nilagay mo sa form papunta sa localStorage ng browser
+    }
+} // <--- Dito na-close ang changeTheme function
+
+// 1. SAVE DRAFT: Isine-save ang mga nilagay mo sa form papunta sa localStorage ng browser
 function saveResumeDraft() {
     const formData = {
         name: document.getElementById('inputName').value,
@@ -112,5 +115,4 @@ function shareMyCV() {
 // 4. PRINT / PDF: Nagbubukas ng print dialog para ma-save as PDF
 function printResumePDF() {
     window.print();
-            }
-}
+} // <--- Isang closing bracket na lang para sa printResumePDF
