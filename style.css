@@ -1,123 +1,52 @@
-/* --- Footer Layout --- */
-.crisp-footer {
+/* --- Universal Action Footer --- */
+.crisp-action-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0;
-    margin-top: 30px;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    gap: 15px;
+    margin: 30px auto;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
 }
 
 .footer-buttons {
     display: flex;
     gap: 12px;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-/* ==========================================
-   THEME 1: SAILOR MOON THEME (Pastel Pink)
-   ========================================== */
-body.sailor-theme .btn-clean {
+/* --- Clean / Outline Buttons (Save & Load) --- */
+.btn-clean {
     background: transparent;
-    color: #ff1493;
-    border: 2px solid #ff69b4;
+    color: var(--theme-primary, #ff1493);
+    border: 2px solid var(--theme-primary, #ff69b4);
+    padding: 8px 18px;
     border-radius: 20px;
-    padding: 8px 18px;
     font-weight: bold;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
-body.sailor-theme .btn-clean:hover {
-    background: #ff69b4;
+
+.btn-clean:hover {
+    background: var(--theme-primary, #ff69b4);
     color: #ffffff;
 }
-body.sailor-theme .btn-magical {
-    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+
+/* --- Magical / Solid Gradient Buttons (Share CV & Print) --- */
+.btn-magical {
+    background: linear-gradient(135deg, var(--theme-gradient-start, #ffb6c1), var(--theme-primary, #ff69b4));
     color: #ffffff;
     border: none;
+    padding: 10px 22px;
     border-radius: 20px;
-    padding: 10px 22px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(255, 105, 180, 0.4);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.2s ease;
 }
 
-/* ==========================================
-   THEME 2: CYAN CYBER THEME (Neon Blue/Dark)
-   ========================================== */
-body.cyan-cyber-theme .btn-clean {
-    background: transparent;
-    color: #00ffff;
-    border: 2px solid #00ffff;
-    border-radius: 4px;
-    padding: 8px 18px;
-    font-weight: bold;
-    cursor: pointer;
-    text-shadow: 0 0 5px rgba(0,255,255,0.5);
-}
-body.cyan-cyber-theme .btn-clean:hover {
-    background: #00ffff;
-    color: #000000;
-}
-body.cyan-cyber-theme .btn-magical {
-    background: linear-gradient(135deg, #008b8b, #00ffff);
-    color: #000000;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 22px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,255,255,0.6);
-}
-
-/* ==========================================
-   THEME 3: CORPORATE NAVY THEME (Blue/Professional)
-   ========================================== */
-body.corporate-navy-theme .btn-clean {
-    background: transparent;
-    color: #1e3a8a;
-    border: 2px solid #3b82f6;
-    border-radius: 6px;
-    padding: 8px 18px;
-    font-weight: bold;
-    cursor: pointer;
-}
-body.corporate-navy-theme .btn-clean:hover {
-    background: #3b82f6;
-    color: #ffffff;
-}
-body.corporate-navy-theme .btn-magical {
-    background: linear-gradient(135deg, #1e40af, #3b82f6);
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 22px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* ==========================================
-   THEME 4: MODERN EMERALD THEME (Green/Fresh)
-   ========================================== */
-body.modern-emerald-theme .btn-clean {
-    background: transparent;
-    color: #065f46;
-    border: 2px solid #10b981;
-    border-radius: 6px;
-    padding: 8px 18px;
-    font-weight: bold;
-    cursor: pointer;
-}
-body.modern-emerald-theme .btn-clean:hover {
-    background: #10b981;
-    color: #ffffff;
-}
-body.modern-emerald-theme .btn-magical {
-    background: linear-gradient(135deg, #047857, #10b981);
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 22px;
-    font-weight: bold;
-    cursor: pointer;
+.btn-magical:hover {
+    opacity: 0.9;
 }
