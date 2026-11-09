@@ -3,30 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Resume & CV Studio</title>
+    <title>Professional Resume & CV Studio - Crisp Suite</title>
     <!-- Tailwind CSS for rapid, clean styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @media print {
-            body { background: white; -webkit-print-color-adjust: exact; }
-            .no-print { display: none !important; }
-            .print-container { box-shadow: none !important; margin: 0 !important; width: 100% !important; padding: 0 !important; }
+        :root {
+            --theme-primary: #0284c7; /* Sky Cyan default */
+            --theme-accent: #0369a1;
         }
+        .theme-cyan { --theme-primary: #0284c7; --theme-accent: #0369a1; }
+        .theme-pink { --theme-primary: #db2777; --theme-accent: #9d174d; } /* Sailor Moon Pink */
+        .theme-navy { --theme-primary: #1e3a8a; --theme-accent: #1e40af; } /* Corporate Navy */
+        .theme-emerald { --theme-primary: #059669; --theme-accent: #047857; } /* Modern Emerald */
+
+        @media print {
+            body { background: white !important; -webkit-print-color-adjust: exact; }
+            .no-print { display: none !important; }
+            .print-container { box-shadow: none !important; margin: 0 !important; width: 100% !important; border: none !important; }
+        }
+        
+        /* Paper size classes */
+        .paper-a4 { width: 210mm; min-height: 297mm; }
+        .paper-letter { width: 8.5in; min-height: 11in; }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body id="bodyRoot" class="theme-pink bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
 
     <!-- Top Navigation / Header -->
     <header class="bg-slate-900 text-white shadow-md no-print py-4 px-6 flex flex-wrap justify-between items-center">
         <div>
             <h1 class="text-xl font-bold tracking-wide flex items-center gap-2">
                 📄 Professional Resume & CV Studio
-                <span class="text-xs bg-cyan-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Beta</span>
+                <span class="text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Sailor Moon Edition</span>
             </h1>
-            <p class="text-xs text-slate-400 mt-0.5">Build, preview, and print clean professional resumes and curriculum vitae instantly.</p>
+            <p class="text-xs text-slate-400 mt-0.5">Build, customize colors, select paper size, and print professional resumes instantly.</p>
         </div>
         <div class="flex items-center gap-3 mt-3 sm:mt-0">
-            <button onclick="window.print()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow flex items-center gap-2">
+            <button onclick="window.print()" class="bg-pink-600 hover:bg-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow flex items-center gap-2">
                 🖨️ Print / Save PDF
             </button>
         </div>
@@ -35,69 +48,91 @@
     <!-- Main Workspace -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        <!-- Left Column: Form Controls (No Print) -->
+        <!-- Left Column: Form Controls & Customization (No Print) -->
         <section class="lg:col-span-5 bg-white rounded-xl shadow-sm border border-slate-200 p-5 no-print flex flex-col gap-5 overflow-y-auto max-h-[82vh]">
             <div class="border-b pb-3">
                 <h2 class="text-lg font-semibold text-slate-900">Document Settings</h2>
-                <label class="block text-xs font-medium text-slate-500 mt-2 mb-1">Select Format Mode:</label>
-                <select id="docMode" onchange="toggleMode()" class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 focus:ring-2 focus:ring-cyan-500 outline-none">
-                    <option value="resume">Standard Resume (Concise)</option>
-                    <option value="cv" selected>Comprehensive Curriculum Vitae (CV)</option>
-                </select>
+                
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-500 mb-1">Format Mode:</label>
+                        <select id="docMode" onchange="toggleMode()" class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 outline-none">
+                            <option value="resume">Resume (Concise)</option>
+                            <option value="cv" selected>CV (Comprehensive)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-500 mb-1">Paper Size:</label>
+                        <select id="paperSize" onchange="changePaperSize()" class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 outline-none">
+                            <option value="a4" selected>A4 Standard</option>
+                            <option value="letter">US Letter</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <label class="block text-xs font-medium text-slate-500 mb-1">Color Palette Theme:</label>
+                    <select id="colorTheme" onchange="changeTheme()" class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 outline-none">
+                        <option value="theme-pink" selected>💖 Sailor Moon Pink (Vibrant)</option>
+                        <option value="theme-cyan">⚡ Cyber Cyan</option>
+                        <option value="theme-navy">💼 Corporate Navy</option>
+                        <option value="theme-emerald">🌿 Modern Emerald</option>
+                    </select>
+                </div>
             </div>
 
             <!-- Personal Details -->
             <div class="space-y-3">
                 <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">1. Personal Information</h3>
-                <input type="text" id="inputName" placeholder="Full Name (e.g. Maria Santos)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
-                <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Senior Software Engineer)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+                <input type="text" id="inputName" placeholder="Full Name (e.g. Maria Santos)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none focus:ring-2 focus:ring-pink-500">
+                <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Senior Software Engineer)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none focus:ring-2 focus:ring-pink-500">
                 <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="inputEmail" placeholder="Email Address" oninput="updatePreview()" class="border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
-                    <input type="text" id="inputPhone" placeholder="Phone Number" oninput="updatePreview()" class="border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+                    <input type="text" id="inputEmail" placeholder="Email Address" oninput="updatePreview()" class="border rounded-lg p-2 text-sm outline-none">
+                    <input type="text" id="inputPhone" placeholder="Phone Number" oninput="updatePreview()" class="border rounded-lg p-2 text-sm outline-none">
                 </div>
-                <input type="text" id="inputLocation" placeholder="Location (e.g. Manila, Philippines)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+                <input type="text" id="inputLocation" placeholder="Location (e.g. Manila, Philippines)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none">
             </div>
 
             <!-- Summary / Objective -->
             <div class="space-y-3">
                 <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">2. Professional Summary</h3>
-                <textarea id="inputSummary" rows="3" placeholder="Brief summary of your professional background and core strengths..." oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
+                <textarea id="inputSummary" rows="3" placeholder="Brief summary of your professional background..." oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
 
             <!-- Experience -->
             <div class="space-y-3">
                 <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">3. Work Experience</h3>
-                <textarea id="inputExperience" rows="4" placeholder="Company A - Job Title (Year - Year)&#10;• Key responsibility or achievement 1&#10;• Key responsibility or achievement 2" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
+                <textarea id="inputExperience" rows="4" placeholder="Company A - Job Title (Year - Year)&#10;• Key responsibility 1&#10;• Key responsibility 2" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
 
             <!-- Education -->
             <div class="space-y-3">
                 <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">4. Education</h3>
-                <textarea id="inputEducation" rows="3" placeholder="University Name - Degree/Course (Graduation Year)&#10;• Honors or relevant coursework" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
+                <textarea id="inputEducation" rows="3" placeholder="University Name - Degree (Year)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
 
             <!-- Skills -->
             <div class="space-y-3">
                 <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">5. Skills</h3>
-                <input type="text" id="inputSkills" placeholder="JavaScript, Python, Project Management, UI/UX" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+                <input type="text" id="inputSkills" placeholder="JavaScript, Python, Project Management" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none">
             </div>
 
-            <!-- CV Specific Sections (Conditional) -->
+            <!-- CV Specific Sections -->
             <div id="cvExtraSection" class="space-y-3 pt-3 border-t">
-                <h3 class="text-sm font-bold text-cyan-700 uppercase tracking-wider">6. CV Extra Sections (Research / Certs)</h3>
-                <textarea id="inputCertifications" rows="2" placeholder="Certifications & Licenses (e.g. AWS Certified Developer)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
-                <textarea id="inputPublications" rows="2" placeholder="Research Publications or Notable Projects" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
+                <h3 class="text-sm font-bold text-pink-600 uppercase tracking-wider">6. CV Extra Sections</h3>
+                <textarea id="inputCertifications" rows="2" placeholder="Certifications & Licenses" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none"></textarea>
+                <textarea id="inputPublications" rows="2" placeholder="Publications or Projects" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
         </section>
 
         <!-- Right Column: Live Preview Paper -->
-        <section class="lg:col-span-7 flex justify-center items-start">
-            <div id="previewContainer" class="print-container bg-white w-full max-w-3xl min-h-[1000px] p-8 sm:p-12 shadow-md rounded-xl border border-slate-200 flex flex-col text-slate-800">
+        <section class="lg:col-span-7 flex justify-center items-start overflow-auto">
+            <div id="previewContainer" class="print-container paper-a4 bg-white mx-auto p-8 sm:p-12 shadow-md rounded-xl border border-slate-200 flex flex-col text-slate-800 transition-all">
                 
                 <!-- Header Preview -->
                 <div class="border-b pb-4 mb-5 text-center sm:text-left">
                     <h1 id="prevName" class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Your Name</h1>
-                    <p id="prevTitle" class="text-base font-medium text-cyan-700 mt-0.5">Professional Title</p>
+                    <p id="prevTitle" class="text-base font-medium mt-0.5" style="color: var(--theme-primary);">Professional Title</p>
                     <div id="prevContact" class="text-xs text-slate-500 flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-1 mt-2">
                         <span id="prevEmail">email@example.com</span> • 
                         <span id="prevPhone">+63 900 000 0000</span> • 
@@ -146,13 +181,11 @@
 
     </main>
 
-      </main>
-
     <!-- Footer with Ko-fi Support Link -->
     <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500 no-print mt-auto flex flex-col sm:flex-row justify-center items-center gap-2">
-        <span>HandleVault Digital • Free Browser-Based Utility • <a href="mailto:handlevault.digital@proton.me" class="text-cyan-600 hover:underline">handlevault.digital@proton.me</a></span>
+        <span>HandleVault Digital • Crisp Suite Utility • <a href="mailto:handlevault.digital@proton.me" class="hover:underline" style="color: var(--theme-primary);">handlevault.digital@proton.me</a></span>
         <span class="hidden sm:inline">•</span>
-        <a href="https://ko-fi.com//Handlevaultofficial" target="_blank" class="inline-flex items-center gap-1 text-pink-600 font-semibold hover:underline">
+        <a href="https://ko-fi.com//Handlevaultofficial" target="_blank" class="inline-flex items-center gap-1 font-semibold hover:underline" style="color: var(--theme-primary);">
             ☕ Support on Ko-fi
         </a>
     </footer>
@@ -173,15 +206,31 @@
             }
         }
 
+        function changePaperSize() {
+            const size = document.getElementById('paperSize').value;
+            const container = document.getElementById('previewContainer');
+            if (size === 'letter') {
+                container.classList.remove('paper-a4');
+                container.classList.add('paper-letter');
+            } else {
+                container.classList.remove('paper-letter');
+                container.classList.add('paper-a4');
+            }
+        }
+
+        function changeTheme() {
+            const theme = document.getElementById('colorTheme').value;
+            const root = document.getElementById('bodyRoot');
+            root.className = theme + ' bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col';
+        }
+
         function updatePreview() {
-            // Personal Info
             document.getElementById('prevName').innerText = document.getElementById('inputName').value || 'Your Name';
             document.getElementById('prevTitle').innerText = document.getElementById('inputTitle').value || 'Professional Title';
             document.getElementById('prevEmail').innerText = document.getElementById('inputEmail').value || 'email@example.com';
             document.getElementById('prevPhone').innerText = document.getElementById('inputPhone').value || '+63 900 000 0000';
             document.getElementById('prevLocation').innerText = document.getElementById('inputLocation').value || 'City, Country';
 
-            // Sections
             document.getElementById('prevSummary').innerText = document.getElementById('inputSummary').value || 'Write a summary to see it formatted cleanly here.';
             document.getElementById('prevExperience').innerText = document.getElementById('inputExperience').value || 'Detail your work experience on the left panel.';
             document.getElementById('prevEducation').innerText = document.getElementById('inputEducation').value || 'List your academic history on the left panel.';
@@ -190,8 +239,8 @@
             document.getElementById('prevPublications').innerText = document.getElementById('inputPublications').value || 'Add notable publications or projects here.';
         }
 
-        // Initialize default view
         toggleMode();
     </script>
 </body>
-</html>
+                </html>
+                
