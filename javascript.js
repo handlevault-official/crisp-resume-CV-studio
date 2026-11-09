@@ -116,3 +116,80 @@ function shareMyCV() {
 function printResumePDF() {
     window.print();
 } // <--- Isang closing bracket na lang para sa printResumePDF
+function updatePreview() {
+    // 1. Kunin ang mga values mula sa input fields
+    const data = {
+        name: document.getElementById('inputName').value,
+        title: document.getElementById('inputTitle').value,
+        email: document.getElementById('inputEmail').value,
+        phone: document.getElementById('inputPhone').value,
+        location: document.getElementById('inputLocation').value,
+        summary: document.getElementById('inputSummary').value,
+        experience: document.getElementById('inputExperience').value,
+        education: document.getElementById('inputEducation').value,
+        skills: document.getElementById('inputSkills').value,
+        certifications: document.getElementById('inputCertifications') ? document.getElementById('inputCertifications').value : '',
+        publications: document.getElementById('inputPublications') ? document.getElementById('inputPublications').value : '',
+        docMode: document.getElementById('docMode').value,
+        paperSize: document.getElementById('paperSize').value,
+        colorTheme: document.getElementById('colorTheme').value
+    };
+
+    // 2. I-save agad sa localStorage ng browser para hindi mawala kapag ni-refresh
+    localStorage.setItem('crisp_resume_auto_draft', JSON.stringify(data));
+
+    // 3. I-update ang Live Preview sa kanan
+    document.getElementById('prevName').innerText = data.name || 'Your Name';
+    document.getElementById('prevTitle').innerText = data.title || 'Professional Title';
+    document.getElementById('prevEmail').innerText = data.email || 'email@example.com';
+    document.getElementById('prevPhone').innerText = data.phone || '+63 900 000 0000';
+    document.getElementById('prevLocation').innerText = data.location || 'City, Country';
+
+    document.getElementById('prevSummary').innerText = data.summary || 'Write a summary to see it formatted cleanly here.';
+    document.getElementById('prevExperience').innerText = data.experience || 'Detail your work experience on the left panel.';
+    document.getElementById('prevEducation').innerText = data.education || 'List your academic history on the left panel.';
+    document.getElementById('prevSkills').innerText = data.skills || 'List core skills separated by commas.';
+    
+    if(document.getElementById('prevCertifications')) {
+        document.getElementById('prevCertifications').innerText = data.certifications || 'Add your certifications here.';
+    }
+    if(document.getElementById('prevPublications')) {
+        document.getElementById('prevPublications').innerText = data.publications || 'Add notable publications or projects here.';
+    }
+}
+// Awtomatikong i-load ang huling draft kapag binuksan o ni-refresh ang page
+window.onload = function() {
+    const savedData = localStorage.getItem('crisp_resume_auto_draft');
+    if (savedData) {
+        const formData = JSON.parse(savedData);
+        
+        document.getElementById('inputName').value = formData.name || '';
+        document.getElementById('inputTitle').value = formData.title || '';
+        document.getElementById('inputEmail').value = formData.email || '';
+        document.getElementById('inputPhone').value = formData.phone || '';
+        document.getElementById('inputLocation').value = formData.location || '';
+        document.getElementById('inputSummary').value = formData.summary || '';
+        document.getElementById('inputExperience').value = formData.experience || '';
+        document.getElementById('inputEducation').value = formData.education || '';
+        document.getElementById('inputSkills').value = formData.skills || '';
+        
+        if(document.getElementById('inputCertifications')) document.getElementById('inputCertifications').value = formData.certifications || '';
+        if(document.getElementById('inputPublications')) document.getElementById('inputPublications').value = formData.publications || '';
+        
+        if(formData.docMode) {
+            document.getElementById('docMode').value = formData.docMode;
+            toggleMode();
+        }
+        if(formData.paperSize) {
+            document.getElementById('paperSize').value = formData.paperSize;
+            changePaperSize();
+        }
+        if(formData.colorTheme) {
+            document.getElementById('colorTheme').value = formData.colorTheme;
+            changeTheme();
+        }
+
+        // I-update ang preview para lumitaw agad
+        updatePreview();
+    }
+};
