@@ -39,13 +39,44 @@
             </h1>
             <p class="text-xs text-slate-400 mt-0.5">Build, customize colors, select paper size, and print professional resumes instantly.</p>
         </div>
-        <div class="flex items-center gap-3 mt-3 sm:mt-0">
-            <button onclick="window.print()" class="bg-pink-600 hover:bg-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow flex items-center gap-2">
-                🖨️ Print / Save PDF
+            <!-- Top Navigation / Header -->
+    <header class="bg-slate-900 text-white shadow-md no-print py-4 px-6 flex flex-wrap justify-between items-center">
+        <div>
+            <h1 class="text-xl font-bold tracking-wide flex items-center gap-2">
+                📄 Professional Resume & CV Studio
+                <span class="text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Sailor Moon Edition</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">Build, customize colors, select paper size, and print professional resumes instantly.</p>
+        </div>
+        
+            <!-- Top Navigation / Header (Naka-no-print ang buong action buttons para ligtas sa PDF) -->
+    <header class="bg-slate-900 text-white shadow-md no-print py-4 px-6 flex flex-wrap justify-between items-center">
+        <div>
+            <h1 class="text-xl font-bold tracking-wide flex items-center gap-2">
+                📄 Professional Resume & CV Studio
+                <span class="text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Sailor Moon Edition</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">Build, customize colors, select paper size, and print professional resumes instantly.</p>
+        </div>
+        
+        <!-- Header Actions Hub (Lahat ng buttons nasa taas, hidden kapag nagprint) -->
+        <div class="flex items-center gap-2 mt-3 sm:mt-0 flex-wrap">
+            <button onclick="saveResumeDraft()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+                💾 Save
+            </button>
+            <button onclick="loadResumeDraft()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+                📂 Load
+            </button>
+            <button onclick="shareMyCV()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+                🔗 Share
+            </button>
+            <button onclick="printResumePDF()" class="bg-pink-600 hover:bg-pink-500 text-white px-4 py-1.5 rounded-lg text-xs font-medium transition shadow flex items-center gap-1.5">
+                🖨️ Print / PDF
             </button>
         </div>
     </header>
 
+        
     <!-- Main Workspace -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
@@ -171,19 +202,6 @@
                         <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Certifications & Licenses</h2>
                         <div id="prevCertifications" class="text-sm text-slate-700 whitespace-pre-line">Add your certifications here.</div>
                   </div>
-
-                    
-    <!-- END OF LIVE PREVIEW CARD -->
-    </div> 
-                    <!-- Action Buttons Footer (Set to no-print so it won't appear when printing) -->
-    <div class="max-w-7xl w-full mx-auto px-6 mb-6 no-print flex flex-col items-center">
-        <div class="crisp-footer-buttons">
-            <button onclick="saveResumeDraft()" class="btn-footer-clean">Save Draft</button>
-            <button onclick="loadResumeDraft()" class="btn-footer-clean">Load Draft</button>
-            <button onclick="shareMyCV()" class="btn-footer-magical">Share CV</button>
-            <button onclick="printResumePDF()" class="btn-footer-magical">Print / Export PDF</button>
-        </div>
-    </div>
                         <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Publications & Projects</h2>
                         <div id="prevPublications" class="text-sm text-slate-700 whitespace-pre-line">Add notable publications or projects here.</div>
                     </div>
