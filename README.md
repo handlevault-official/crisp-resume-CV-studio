@@ -1,18 +1,21 @@
-# 📄 Professional Resume & CV Studio
+# 📄 Crisp Resume & CV Studio (v1.0 Official)
 
-> **[BETA / EARLY ACCESS TOOL]** — A lightweight, free browser-based resume and curriculum vitae (CV) builder built for creators, freelancers, and job seekers. Quickly format, preview, and print clean professional resumes and comprehensive CVs. No account required. All processing happens securely right inside your browser session.
+A modern, fast, and local-first resume creation studio built for the **Crisp Suite**. Craft clean, professional resumes with instant live previews and zero data leaks.
+
+## ✨ Core Features (v1.0)
+* **Live Preview:** See your resume update in real-time as you type your details.
+* **Dynamic Sections:** Easily add and manage work experience, education, and skills.
+* **Theme & Layout Options:** Switch between professional styling and paper sizes instantly.
+* **Print & Save to PDF:** Optimized print utility for clean, recruitment-ready PDF exports.
+* **Private & Secure:** Runs entirely on the client-side; your personal info never leaves your browser.
+
+## 🚀 Quick Start
+1. Open the repository on GitHub Pages.
+2. Fill out your professional background.
+3. Preview and export your clean resume!
 
 ---
-
-## 🚀 Key Features
-
-* **Dual Mode Support (Resume vs. CV):** 
-  * **Standard Resume:** A concise, 1-page professional summary designed for quick screening by recruiters and hiring managers.
-  * **Comprehensive CV (Curriculum Vitae):** A detailed, multi-section academic and professional document that includes extended work history, certifications, and research publications.
-* **Live Preview:** See your document format dynamically update in real-time as you type your details.
-* **Browser Print & PDF Export:** Formatted cleanly with custom print stylesheets for direct browser printing or saving as a high-quality PDF.
-* **Client-Side Privacy:** Your personal details, work history, and data stay locally on your device. We do not store, upload, or track your personal information on external servers.
-* **Clean Typographical Layout:** Designed with a professional, recruiter-friendly structure.
+*HandleVault Digital • Crisp Suite Utility v1.0*
 
 ---
 
