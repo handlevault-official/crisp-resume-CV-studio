@@ -52,4 +52,19 @@ input:focus, select:focus, textarea:focus {
 .theme-border {
     border-color: var(--theme-primary, #db2777) !important;
 }
+/* Para masigurong sumusunod ang border at focus ring sa active theme */
+input:focus, select:focus, textarea:focus {
+    border-color: var(--theme-primary) !important;
+    box-shadow: 0 0 0 2px var(--theme-primary) !important;
+    outline: none !important;
+}
+
+/* Kung gusto mo ring magkaroon ng kulay ang normal border (hindi naka-focus) base sa theme */
+input, select, textarea {
+    border-color: #cbd5e1; /* default gray border */
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--theme-primary) !important;
+}
 
