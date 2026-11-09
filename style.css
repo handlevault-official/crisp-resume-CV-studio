@@ -40,3 +40,16 @@
 .btn-footer-magical:hover {
     opacity: 0.9;
 }
+
+/* Kapag naka-focus o active ang input, susundan nito ang active theme primary color */
+input:focus, select:focus, textarea:focus {
+    border-color: var(--theme-primary, #db2777) !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--theme-primary-rgb, 219, 39, 119), 0.15);
+}
+
+/* Para sa mga active borders/outlines */
+.theme-border {
+    border-color: var(--theme-primary, #db2777) !important;
+}
+
