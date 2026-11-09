@@ -1,18 +1,29 @@
-# 📄 Professional Resume Studio
+# 📄 Professional Resume & CV Studio
 
-A lightweight, browser-based resume and CV builder designed to help job seekers quickly format, preview, and print clean professional resumes. Built as a fast, privacy-focused MVP using vanilla HTML5, CSS, and JavaScript.
-
-> **[BETA / EARLY ACCESS TOOL]** — A lightweight, free browser-based resume and CV builder built for creators, freelancers, and job seekers. Quickly format, preview, and print clean professional resumes. No account required. All processing happens securely right inside your browser session.
+> **[BETA / EARLY ACCESS TOOL]** — A lightweight, free browser-based resume and curriculum vitae (CV) builder built for creators, freelancers, and job seekers. Quickly format, preview, and print clean professional resumes and comprehensive CVs. No account required. All processing happens securely right inside your browser session.
 
 ---
 
 ## 🚀 Key Features
 
-* **Live Preview:** See your resume format dynamically as you type and update your details.
-* **Dynamic Sections:** Easily add, edit, or manage work experience, education background, and skills entries.
-* **Browser Print & PDF Export:** Formatted cleanly for direct browser printing or saving as a high-quality PDF.
+* **Dual Mode Support (Resume vs. CV):** 
+  * **Standard Resume:** A concise, 1-page professional summary designed for quick screening by recruiters and hiring managers.
+  * **Comprehensive CV (Curriculum Vitae):** A detailed, multi-section academic and professional document that includes extended work history, certifications, and research publications.
+* **Live Preview:** See your document format dynamically update in real-time as you type your details.
+* **Browser Print & PDF Export:** Formatted cleanly with custom print stylesheets for direct browser printing or saving as a high-quality PDF.
 * **Client-Side Privacy:** Your personal details, work history, and data stay locally on your device. We do not store, upload, or track your personal information on external servers.
 * **Clean Typographical Layout:** Designed with a professional, recruiter-friendly structure.
+
+---
+
+## 🛠️ Local Development & Testing
+
+If you want to run or test this project locally on your machine, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/handlevault-official/crisp-resume-builder.git](https://github.com/handlevault-official/crisp-resume-builder.git)
+   
 
 ---
 
