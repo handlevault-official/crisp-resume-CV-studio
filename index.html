@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <span id="theme-badge" class="text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">SAILOR MOON EDITION</span>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Resume & CV Studio - Crisp Suite</title>
@@ -10,13 +9,13 @@
     <link rel="stylesheet" href="style.css">
     <style>
         :root {
-            --theme-primary: #0284c7; /* Sky Cyan default */
-            --theme-accent: #0369a1;
+            --theme-primary: #db2777; /* Sailor Moon Pink default */
+            --theme-accent: #9d174d;
         }
+        .theme-pink { --theme-primary: #db2777; --theme-accent: #9d174d; }
         .theme-cyan { --theme-primary: #0284c7; --theme-accent: #0369a1; }
-        .theme-pink { --theme-primary: #db2777; --theme-accent: #9d174d; } /* Sailor Moon Pink */
-        .theme-navy { --theme-primary: #1e3a8a; --theme-accent: #1e40af; } /* Corporate Navy */
-        .theme-emerald { --theme-primary: #059669; --theme-accent: #047857; } /* Modern Emerald */
+        .theme-navy { --theme-primary: #1e3a8a; --theme-accent: #1e40af; }
+        .theme-emerald { --theme-primary: #059669; --theme-accent: #047857; }
 
         @media print {
             body { background: white !important; -webkit-print-color-adjust: exact; }
@@ -31,12 +30,12 @@
 </head>
 <body id="bodyRoot" class="theme-pink bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
     
-      <!-- Top Navigation / Header (Isang beses na lang ang title, may mga buttons pa sa kanan) -->
+    <!-- Top Navigation / Header -->
     <header class="bg-slate-900 text-white shadow-md no-print py-4 px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div>
             <h1 class="text-xl font-bold tracking-wide flex items-center gap-2 flex-wrap">
                 📄 Professional Resume & CV Studio
-                <span class="text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Sailor Moon Edition</span>
+                <span id="theme-badge" class="text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">SAILOR MOON EDITION</span>
             </h1>
             <p class="text-xs text-slate-400 mt-0.5">Build, customize colors, select paper size, and print professional resumes instantly.</p>
         </div>  
@@ -97,8 +96,8 @@
             <!-- Personal Details -->
             <div class="space-y-3">
                 <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">1. Personal Information</h3>
-                <input type="text" id="inputName" placeholder="Full Name (e.g. Maria Santos)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none focus:ring-2 focus:ring-pink-500">
-                <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Senior Software Engineer)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none focus:ring-2 focus:ring-pink-500">
+                <input type="text" id="inputName" placeholder="Full Name (e.g. Maria Santos)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none">
+                <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Senior Software Engineer)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none">
                 <div class="grid grid-cols-2 gap-2">
                     <input type="text" id="inputEmail" placeholder="Email Address" oninput="updatePreview()" class="border rounded-lg p-2 text-sm outline-none">
                     <input type="text" id="inputPhone" placeholder="Phone Number" oninput="updatePreview()" class="border rounded-lg p-2 text-sm outline-none">
@@ -132,7 +131,7 @@
 
             <!-- CV Specific Sections -->
             <div id="cvExtraSection" class="space-y-3 pt-3 border-t">
-                <h3 class="text-sm font-bold text-pink-600 uppercase tracking-wider">6. CV Extra Sections</h3>
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">6. CV Extra Sections</h3>
                 <textarea id="inputCertifications" rows="2" placeholder="Certifications & Licenses" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none"></textarea>
                 <textarea id="inputPublications" rows="2" placeholder="Publications or Projects" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
@@ -182,7 +181,8 @@
                     <div>
                         <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Certifications & Licenses</h2>
                         <div id="prevCertifications" class="text-sm text-slate-700 whitespace-pre-line">Add your certifications here.</div>
-                  </div>
+                    </div>
+                    <div>
                         <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Publications & Projects</h2>
                         <div id="prevPublications" class="text-sm text-slate-700 whitespace-pre-line">Add notable publications or projects here.</div>
                     </div>
@@ -233,7 +233,24 @@
         function changeTheme() {
             const theme = document.getElementById('colorTheme').value;
             const root = document.getElementById('bodyRoot');
+            const badge = document.getElementById('theme-badge');
+
             root.className = theme + ' bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col';
+
+            // Dynamically update the header badge text and color based on selected theme
+            if (theme === 'theme-cyan') {
+                badge.innerText = "CYBER CYAN EDITION";
+                badge.className = "text-xs bg-cyan-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold";
+            } else if (theme === 'theme-navy') {
+                badge.innerText = "CORPORATE NAVY EDITION";
+                badge.className = "text-xs bg-blue-900 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold";
+            } else if (theme === 'theme-emerald') {
+                badge.innerText = "MODERN EMERALD EDITION";
+                badge.className = "text-xs bg-emerald-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold";
+            } else {
+                badge.innerText = "SAILOR MOON EDITION";
+                badge.className = "text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold";
+            }
         }
 
         function updatePreview() {
@@ -254,5 +271,4 @@
         toggleMode();
     </script>
 </body>
-                </html>
-                
+</html>
