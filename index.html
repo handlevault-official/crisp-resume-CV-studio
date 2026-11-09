@@ -40,22 +40,21 @@
             <p class="text-xs text-slate-400 mt-0.5">Build, customize colors, select paper size, and print professional resumes instantly.</p>
         </div>  
         
-        <!-- Header Actions Hub (Save, Load, Share, Print) -->
-        <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-end">
-            <button onclick="saveResumeDraft()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
-                💾 Save
-            </button>
-            <button onclick="loadResumeDraft()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
-                📂 Load
-            </button>
-            <button onclick="shareMyCV()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
-                🔗 Share
-            </button>
-            <button onclick="printResumePDF()" class="bg-pink-600 hover:bg-pink-500 text-white px-4 py-1.5 rounded-lg text-xs font-medium transition shadow flex items-center gap-1.5">
-                🖨️ Print / PDF
-            </button>
-        </div>
-    </header>
+        <!-- Header Actions Hub na may mga malinaw na ID -->
+<div class="flex items-center gap-2 flex-wrap justify-center sm:justify-end">
+    <button id="saveBtn" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+        💾 Save
+    </button>
+    <button id="loadBtn" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+        📂 Load
+    </button>
+    <button id="shareBtn" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+        🔗 Share
+    </button>
+    <button id="printBtn" type="button" class="bg-pink-600 hover:bg-pink-500 text-white px-4 py-1.5 rounded-lg text-xs font-medium transition shadow flex items-center gap-1.5">
+        🖨️ Print / PDF
+    </button>
+</div>
         
     <!-- Main Workspace -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
