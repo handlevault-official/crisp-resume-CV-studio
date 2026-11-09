@@ -33,9 +33,9 @@ If you want to run or test this project locally on your machine, follow these st
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/handlevault-official/crisp-resume&CV-studio.git](https://github.com/handlevault-official/crisp-resume&CV-studio.git)
+   git clone [https://github.com/handlevault-official/crisp-resume-CV-studio.git](https://github.com/handlevault-official/crisp-resume-CV-studio.git)
 2. Navigate to the project directory:
-   cd crisp-resume&CV-studio
+   cd crisp-resume-CV-studio
 
 3. Run a local HTTP server (using Python):
    python3 -m http.server 8000
