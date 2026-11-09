@@ -1,0 +1,37 @@
+/* Sailor Moon Theme Styling */
+.sailor-container {
+    background: #fff0f5; /* Light pink magical background */
+    border: 3px solid #ff69b4; /* Hot pink magical border */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+/* Minimalist / No-fill Load & Save buttons */
+.btn-clean {
+    background: transparent;
+    color: #ff1493; /* Deep pink text */
+    border: 2px solid #ff69b4;
+    padding: 8px 16px;
+    border-radius: 20px; /* Rounded magical look */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-clean:hover {
+    background: #ff69b4;
+    color: #ffffff;
+}
+
+/* Primary Action Button (tulad ng Share CV o Print) */
+.btn-magical {
+    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(255, 105, 180, 0.4);
+}
