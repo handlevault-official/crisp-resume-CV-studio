@@ -1,190 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crisp Resume Builder | HandleVault</title>
-    <style>
-        :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --border: #e2e8f0;
-            --accent-bg: #f8fafc;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Studio — Professional CV Builder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #f1f5f9;
+      --surface: #ffffff;
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --kofi-color: #ff5e5b;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --radius: 10px;
+      --shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+    }
 
-        /* Style Themes */
-        body.theme-corporate {
-            --primary: #0f172a;
-            --primary-hover: #334155;
-            --accent-bg: #f1f5f9;
-        }
-        body.theme-developer {
-            --primary: #0284c7;
-            --primary-hover: #0369a1;
-            --accent-bg: #f0f9ff;
-        }
-        body.theme-executive {
-            --primary: #78350f;
-            --primary-hover: #451a03;
-            --accent-bg: #fffbeb;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+    body { background: var(--bg-canvas); color: var(--text-main); padding: 20px 12px; min-height: 100vh; }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); color: var(--text-main); padding: 20px; min-height: 100vh; transition: background 0.3s; }
-        
-        header { max-width: 1200px; margin: 0 auto 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
-        h1 { color: var(--text-main); font-size: 22px; letter-spacing: -0.5px; }
-        .sub-header { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        
-        .header-actions { display: flex; align-items: center; gap: 12px; }
-        .kofi-link { background: #ff5e5b; color: #fff; text-decoration: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; font-size: 13px; transition: background 0.2s; }
-        .kofi-link:hover { background: #e04845; }
-        
-        .btn { background: var(--primary); color: #fff; border: none; padding: 9px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; transition: background 0.2s; }
-        .btn:hover { background: var(--primary-hover); }
+    .resume-container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 40px;
+      border: 1px solid var(--border-light);
+    }
 
-        .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        
-        /* Editor Panel */
-        .editor-card { background: var(--card-bg); padding: 24px; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 16px; height: fit-content; }
-        .section-title { color: var(--primary); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
-        
-        .style-selector { display: flex; gap: 6px; margin-bottom: 4px; }
-        .style-btn { background: var(--border); border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; color: var(--text-main); }
-        .style-btn.active { background: var(--primary); color: #fff; }
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
 
-        .input-group { display: flex; flex-direction: column; gap: 6px; }
-        label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
-        input, textarea, select { background: var(--accent-bg); border: 1px solid var(--border); color: var(--text-main); padding: 10px; border-radius: 6px; font-size: 13px; width: 100%; font-family: inherit; }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
-        
-        /* Live Resume Sheet Preview */
-        .preview-card { background: #ffffff; color: #0f172a; padding: 40px; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.05); min-height: 700px; }
-        .pv-name { font-size: 28px; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: -0.5px; }
-        .pv-title { font-size: 15px; color: var(--primary); font-weight: 600; margin-bottom: 6px; }
-        .pv-contact { font-size: 12px; color: #475569; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #0f172a; }
-        .pv-section { margin-bottom: 20px; }
-        .pv-section-h2 { font-size: 13px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 8px; }
-        .pv-text { font-size: 13.5px; line-height: 1.6; color: #334155; white-space: pre-line; }
+    .brand-title h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
 
-        footer { max-width: 1200px; margin: 30px auto 0; text-align: center; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 15px; }
-        footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .brand-title p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
 
-        @media print {
-            body { background: #fff; padding: 0; }
-            header, .editor-card, footer { display: none !important; }
-            .container { display: block; }
-            .preview-card { border: none; box-shadow: none; padding: 0; border-radius: 0; }
-        }
-    </style>
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      border-bottom: 1.5px solid var(--border-light);
+      padding-bottom: 8px;
+      margin: 28px 0 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 14px;
+      color: var(--text-main);
+      background: #fafafa;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    }
+
+    .dynamic-item {
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    /* Buttons */
+    .btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .btn:active { transform: scale(0.98); }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1.5px solid var(--border);
+    }
+    .btn-secondary:hover { background: #f1f5f9; }
+
+    .btn-kofi {
+      background: var(--kofi-color);
+      color: white;
+    }
+    .btn-kofi:hover { background: #e04845; }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: #dc2626;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-danger:hover { background: #fca5a5; }
+
+    .actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-light);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .action-buttons-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .resume-container { padding: 16px 12px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .actions-bar { flex-direction: column; align-items: stretch; }
+      .action-buttons-group { flex-direction: column; width: 100%; }
+      .actions-bar a, .actions-bar button { width: 100%; }
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .resume-container { border: none; box-shadow: none; padding: 0; max-width: 100%; }
+      .no-print { display: none !important; }
+      input, textarea { border: none !important; background: transparent !important; padding: 0 !important; box-shadow: none !important; }
+      .dynamic-item { border: none; background: transparent; padding: 0; margin-bottom: 12px; }
+    }
+  </style>
 </head>
-<body class="theme-developer">
+<body>
 
-    <header>
-        <div>
-            <h1>CRISP RESUME BUILDER</h1>
-            <div class="sub-header">Professional Multi-Style Live ATS Resume Generator</div>
-        </div>
-        <div class="header-actions">
-            <a href="https://ko-fi.com/Handlevaultofficial" target="_blank" class="kofi-link">☕ Support on Ko-fi</a>
-            <button class="btn" onclick="window.print()">Print / Save PDF</button>
-        </div>
-    </header>
-
-    <div class="container">
-        <!-- Input Form -->
-        <div class="editor-card">
-            <div class="section-title">
-                <span>Layout & Theme Style</span>
-            </div>
-            <div class="style-selector">
-                <button class="style-btn" onclick="setTheme('corporate', this)">Corporate</button>
-                <button class="style-btn active" onclick="setTheme('developer', this)">Modern Dev</button>
-                <button class="style-btn" onclick="setTheme('executive', this)">Executive</button>
-            </div>
-
-            <div class="section-title" style="margin-top: 10px;">Personal Details</div>
-            <div class="input-group">
-                <label>Full Name</label>
-                <input type="text" id="inName" value="April Arenas" oninput="updatePreview()">
-            </div>
-            <div class="input-group">
-                <label>Professional Title</label>
-                <input type="text" id="inTitle" value="Indie Game Developer & Web Creator" oninput="updatePreview()">
-            </div>
-            <div class="input-group">
-                <label>Contact Info (Email, Location, GitHub)</label>
-                <input type="text" id="inContact" value="contact@handlevault.com | Baguio City, PH | github.com/handlevault-official" oninput="updatePreview()">
-            </div>
-
-            <div class="section-title">Professional Summary</div>
-            <div class="input-group">
-                <textarea id="inSummary" rows="3" oninput="updatePreview()">Passionate developer specializing in pixel art asset creation, lightweight web tools, and interactive applications. Experienced in vanilla web stack deployment and game design assets.</textarea>
-            </div>
-
-            <div class="section-title">Experience & Key Projects</div>
-            <div class="input-group">
-                <textarea id="inExperience" rows="5" oninput="updatePreview()">• Founder & Lead Creator — HandleVault Studios (2026 - Present)
-  Created Crisp Suite tools including Pixel Art Scaler, Invoice Generator, and Bead Pattern Maker.
-
-• Creator — FarmVoice-AI Project
-  Developed and deployed AI tools with integrated machine learning capabilities.</textarea>
-            </div>
-
-            <div class="section-title">Skills & Technologies</div>
-            <div class="input-group">
-                <textarea id="inSkills" rows="3" oninput="updatePreview()">HTML5, CSS3, Vanilla JavaScript, GitHub Pages, Pixel Art Design, Prompt Engineering, Web Automation.</textarea>
-            </div>
-        </div>
-
-        <!-- Live Resume Sheet Preview -->
-        <div class="preview-card">
-            <div class="pv-name" id="outName">April Arenas</div>
-            <div class="pv-title" id="outTitle">Indie Game Developer & Web Creator</div>
-            <div class="pv-contact" id="outContact">contact@handlevault.com | Baguio City, PH | github.com/handlevault-official</div>
-
-            <div class="pv-section">
-                <div class="pv-section-h2">Summary</div>
-                <div class="pv-text" id="outSummary"></div>
-            </div>
-
-            <div class="pv-section">
-                <div class="pv-section-h2">Experience & Projects</div>
-                <div class="pv-text" id="outExperience"></div>
-            </div>
-
-            <div class="pv-section">
-                <div class="pv-section-h2">Skills & Technologies</div>
-                <div class="pv-text" id="outSkills"></div>
-            </div>
-        </div>
+  <div class="resume-container">
+    <div class="top-header">
+      <div class="brand-title">
+        <h1>RESUME STUDIO</h1>
+        <p>Professional CV & Portfolio Builder</p>
+      </div>
     </div>
 
-    <footer>
-        Crisp Suite by <a href="https://ko-fi.com/Handlevaultofficial" target="_blank">HandleVault</a> — Clean, Fast & Single-File Utilities.
-    </footer>
+    <!-- Personal Details -->
+    <div class="section-title">Personal Information</div>
+    <div class="grid-2">
+      <div class="field-group">
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="e.g. April Arenas" />
+      </div>
+      <div class="field-group">
+        <label>Job Title / Profession</label>
+        <input type="text" id="jobTitle" placeholder="e.g. Full Stack Developer" />
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="field-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" />
+      </div>
+      <div class="field-group">
+        <label>Phone Number</label>
+        <input type="text" id="phone" placeholder="+63 900 000 0000" />
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Professional Summary</label>
+      <textarea id="summary" rows="3" placeholder="Write a short, powerful summary of your experience and career goals..."></textarea>
+    </div>
 
-    <script>
-        function updatePreview() {
-            document.getElementById('outName').textContent = document.getElementById('inName').value || 'Your Name';
-            document.getElementById('outTitle').textContent = document.getElementById('inTitle').value || 'Your Title';
-            document.getElementById('outContact').textContent = document.getElementById('inContact').value || 'Contact Info';
-            document.getElementById('outSummary').textContent = document.getElementById('inSummary').value;
-            document.getElementById('outExperience').textContent = document.getElementById('inExperience').value;
-            document.getElementById('outSkills').textContent = document.getElementById('inSkills').value;
-        }
+    <!-- Work Experience Section -->
+    <div class="section-title">
+      <span>Work Experience</span>
+      <button class="btn btn-secondary no-print" style="padding: 6px 12px; font-size: 12px;" onclick="addExperience()">+ Add Role</button>
+    </div>
+    <div id="experienceContainer"></div>
 
-        function setTheme(themeName, btn) {
-            document.body.className = 'theme-' + themeName;
-            document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
+    <!-- Education Section -->
+    <div class="section-title">
+      <span>Education</span>
+      <button class="btn btn-secondary no-print" style="padding: 6px 12px; font-size: 12px;" onclick="addEducation()">+ Add School</button>
+    </div>
+    <div id="educationContainer"></div>
 
-        updatePreview();
-    </script>
+    <!-- Action Bar & Ko-fi -->
+    <div class="actions-bar no-print">
+      <a href="https://ko-fi.com/handlevault" target="_blank" class="btn btn-kofi">
+        ☕ Support on Ko-fi
+      </a>
+      
+      <div class="action-buttons-group">
+        <button class="btn btn-secondary" onclick="saveDraft()">Save Draft</button>
+        <button class="btn" onclick="window.print()">Print / Export PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let experiences = [
+      { role: "Software Developer", company: "Tech Solutions", period: "2024 - Present", details: "Developed and deployed scalable web applications." }
+    ];
+
+    let educations = [
+      { degree: "Bachelor of Science in Information Technology", school: "University", period: "2020 - 2024" }
+    ];
+
+    function renderExperience() {
+      const container = document.getElementById('experienceContainer');
+      container.innerHTML = '';
+      experiences.forEach((exp, idx) => {
+        const div = document.createElement('div');
+        div.className = 'dynamic-item';
+        div.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;" class="no-print">
+            <span style="font-size: 12px; font-weight: bold; color: var(--text-muted);">Role #${idx + 1}</span>
+            <button class="btn-danger" onclick="removeExperience(${idx})">Remove</button>
+          </div>
+          <div class="grid-2" style="margin-bottom: 12px;">
+            <div class="field-group"><label>Job Title</label><input type="text" value="${exp.role}" oninput="updateExp(${idx}, 'role', this.value)" /></div>
+            <div class="field-group"><label>Company / Organization</label><input type="text" value="${exp.company}" oninput="updateExp(${idx}, 'company', this.value)" /></div>
+          </div>
+          <div class="field-group" style="margin-bottom: 12px;"><label>Period</label><input type="text" value="${exp.period}" oninput="updateExp(${idx}, 'period', this.value)" /></div>
+          <div class="field-group"><label>Key Responsibilities & Achievements</label><textarea rows="2" oninput="updateExp(${idx}, 'details', this.value)">${exp.details}</textarea></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function renderEducation() {
+      const container = document.getElementById('educationContainer');
+      container.innerHTML = '';
+      educations.forEach((edu, idx) => {
+        const div = document.createElement('div');
+        div.className = 'dynamic-item';
+        div.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;" class="no-print">
+            <span style="font-size: 12px; font-weight: bold; color: var(--text-muted);">Education #${idx + 1}</span>
+            <button class="btn-danger" onclick="removeEducation(${idx})">Remove</button>
+          </div>
+          <div class="grid-2" style="margin-bottom: 12px;">
+            <div class="field-group"><label>Degree / Course</label><input type="text" value="${edu.degree}" oninput="updateEdu(${idx}, 'degree', this.value)" /></div>
+            <div class="field-group"><label>School / Institution</label><input type="text" value="${edu.school}" oninput="updateEdu(${idx}, 'school', this.value)" /></div>
+          </div>
+          <div class="field-group"><label>Period</label><input type="text" value="${edu.period}" oninput="updateEdu(${idx}, 'period', this.value)" /></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function addExperience() {
+      experiences.push({ role: "", company: "", period: "", details: "" });
+      renderExperience();
+    }
+    function removeExperience(idx) {
+      experiences.splice(idx, 1);
+      renderExperience();
+    }
+    function updateExp(idx, field, val) { experiences[idx][field] = val; }
+
+    function addEducation() {
+      educations.push({ degree: "", school: "", period: "" });
+      renderEducation();
+    }
+    function removeEducation(idx) {
+      educations.splice(idx, 1);
+      renderEducation();
+    }
+    function updateEdu(idx, field, val) { educations[idx][field] = val; }
+
+    function saveDraft() {
+      const data = {
+        fullName: document.getElementById('fullName').value,
+        jobTitle: document.getElementById('jobTitle').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        summary: document.getElementById('summary').value,
+        experiences,
+        educations
+      };
+      localStorage.setItem('resume_draft', JSON.stringify(data));
+      alert('Resume draft saved successfully in browser!');
+    }
+
+    function loadDraft() {
+      const saved = localStorage.getItem('resume_draft');
+      if (saved) {
+        const data = JSON.parse(saved);
+        document.getElementById('fullName').value = data.fullName || '';
+        document.getElementById('jobTitle').value = data.jobTitle || '';
+        document.getElementById('email').value = data.email || '';
+        document.getElementById('phone').value = data.phone || '';
+        document.getElementById('summary').value = data.summary || '';
+        if (data.experiences && data.experiences.length) experiences = data.experiences;
+        if (data.educations && data.educations.length) educations = data.educations;
+      }
+    }
+
+    window.onload = () => {
+      loadDraft();
+      renderExperience();
+      renderEducation();
+    };
+  </script>
 </body>
 </html>
+
