@@ -1,491 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resume Studio — Professional CV Builder</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-canvas: #f1f5f9;
-      --surface: #ffffff;
-      --primary: #0f172a;
-      --accent: #2563eb;
-      --accent-hover: #1d4ed8;
-      --kofi-color: #ff5e5b;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --border: #cbd5e1;
-      --border-light: #e2e8f0;
-      --radius: 10px;
-      --shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
-    body { background: var(--bg-canvas); color: var(--text-main); padding: 20px 12px; min-height: 100vh; }
-
-    .resume-container {
-      max-width: 850px;
-      margin: 0 auto;
-      background: var(--surface);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      padding: 40px;
-      border: 1px solid var(--border-light);
-    }
-
-    .top-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid var(--primary);
-      padding-bottom: 20px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .brand-title h1 {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.5px;
-    }
-
-    .brand-title p {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .section-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--primary);
-      border-bottom: 1.5px solid var(--border-light);
-      padding-bottom: 8px;
-      margin: 28px 0 16px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    label {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--text-muted);
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      font-size: 14px;
-      color: var(--text-main);
-      background: #fafafa;
-      outline: none;
-      transition: all 0.2s ease;
-    }
-
-    input:focus, textarea:focus {
-      border-color: var(--accent);
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-    }
-
-    .dynamic-item {
-      background: #f8fafc;
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border-light);
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    .btn {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: var(--radius);
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: background 0.2s, transform 0.1s;
-      text-decoration: none;
-    }
-    .btn:hover { background: var(--accent-hover); }
-    .btn:active { transform: scale(0.98); }
-
-    .btn-secondary {
-      background: #ffffff;
-      color: var(--text-main);
-      border: 1.5px solid var(--border);
-    }
-    .btn-secondary:hover { background: #f1f5f9; }
-
-    .btn-kofi {
-      background: var(--kofi-color);
-      color: white;
-    }
-    .btn-kofi:hover { background: #e04845; }
-
-    .btn-danger {
-      background: #fee2e2;
-      color: #dc2626;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    .btn-danger:hover { background: #fca5a5; }
-
-    .actions-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 40px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border-light);
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .action-buttons-group {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 768px) {
-      .resume-container { padding: 16px 12px; }
-      .grid-2 { grid-template-columns: 1fr; }
-      .actions-bar { flex-direction: column; align-items: stretch; }
-      .action-buttons-group { flex-direction: column; width: 100%; }
-      .actions-bar a, .actions-bar button { width: 100%; }
-    }
-
-    @media print {
-      body { background: white; padding: 0; }
-      .resume-container { border: none; box-shadow: none; padding: 0; max-width: 100%; }
-      .no-print { display: none !important; }
-      input, textarea { border: none !important; background: transparent !important; padding: 0 !important; box-shadow: none !important; }
-      .dynamic-item { border: none; background: transparent; padding: 0; margin-bottom: 12px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume & CV Studio</title>
+    <!-- Tailwind CSS for rapid, clean styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            body { background: white; -webkit-print-color-adjust: exact; }
+            .no-print { display: none !important; }
+            .print-container { box-shadow: none !important; margin: 0 !important; width: 100% !important; padding: 0 !important; }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
 
-  <div class="resume-container">
-    <div class="top-header">
-      <div class="brand-title">
-        <h1>RESUME STUDIO</h1>
-        <p>Professional CV & Portfolio Builder</p>
-      </div>
-    </div>
+    <!-- Top Navigation / Header -->
+    <header class="bg-slate-900 text-white shadow-md no-print py-4 px-6 flex flex-wrap justify-between items-center">
+        <div>
+            <h1 class="text-xl font-bold tracking-wide flex items-center gap-2">
+                📄 Professional Resume & CV Studio
+                <span class="text-xs bg-cyan-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Beta</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">Build, preview, and print clean professional resumes and curriculum vitae instantly.</p>
+        </div>
+        <div class="flex items-center gap-3 mt-3 sm:mt-0">
+            <button onclick="window.print()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow flex items-center gap-2">
+                🖨️ Print / Save PDF
+            </button>
+        </div>
+    </header>
 
-    <!-- Personal Details -->
-    <div class="section-title">Personal Information</div>
-    <div class="grid-2">
-      <div class="field-group">
-        <label>Full Name</label>
-        <input type="text" id="fullName" placeholder="e.g. April Arenas" />
-      </div>
-      <div class="field-group">
-        <label>Job Title / Profession</label>
-        <input type="text" id="jobTitle" placeholder="e.g. Full Stack Developer" />
-      </div>
-    </div>
-    <div class="grid-2">
-      <div class="field-group">
-        <label>Email Address</label>
-        <input type="email" id="email" placeholder="you@example.com" />
-      </div>
-      <div class="field-group">
-        <label>Phone Number</label>
-        <input type="text" id="phone" placeholder="+63 900 000 0000" />
-      </div>
-    </div>
-    <div class="field-group">
-      <label>Professional Summary</label>
-      <textarea id="summary" rows="3" placeholder="Write a short, powerful summary of your experience and career goals..."></textarea>
-    </div>
+    <!-- Main Workspace -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-    <!-- Work Experience Section -->
-    <div class="section-title">
-      <span>Work Experience</span>
-      <button class="btn btn-secondary no-print" style="padding: 6px 12px; font-size: 12px;" onclick="addExperience()">+ Add Role</button>
-    </div>
-    <div id="experienceContainer"></div>
+        <!-- Left Column: Form Controls (No Print) -->
+        <section class="lg:col-span-5 bg-white rounded-xl shadow-sm border border-slate-200 p-5 no-print flex flex-col gap-5 overflow-y-auto max-h-[82vh]">
+            <div class="border-b pb-3">
+                <h2 class="text-lg font-semibold text-slate-900">Document Settings</h2>
+                <label class="block text-xs font-medium text-slate-500 mt-2 mb-1">Select Format Mode:</label>
+                <select id="docMode" onchange="toggleMode()" class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 focus:ring-2 focus:ring-cyan-500 outline-none">
+                    <option value="resume">Standard Resume (Concise)</option>
+                    <option value="cv" selected>Comprehensive Curriculum Vitae (CV)</option>
+                </select>
+            </div>
 
-    <!-- Education Section -->
-    <div class="section-title">
-      <span>Education</span>
-      <button class="btn btn-secondary no-print" style="padding: 6px 12px; font-size: 12px;" onclick="addEducation()">+ Add School</button>
-    </div>
-    <div id="educationContainer"></div>
+            <!-- Personal Details -->
+            <div class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">1. Personal Information</h3>
+                <input type="text" id="inputName" placeholder="Full Name (e.g. Maria Santos)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+                <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Senior Software Engineer)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" id="inputEmail" placeholder="Email Address" oninput="updatePreview()" class="border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+                    <input type="text" id="inputPhone" placeholder="Phone Number" oninput="updatePreview()" class="border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+                </div>
+                <input type="text" id="inputLocation" placeholder="Location (e.g. Manila, Philippines)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+            </div>
 
-    <!-- Action Bar & Ko-fi -->
-    <div class="actions-bar no-print">
-      <a href="https://ko-fi.com/handlevault" target="_blank" class="btn btn-kofi">
-        ☕ Support on Ko-fi
-      </a>
-      
-      <div class="action-buttons-group">
-        <button class="btn btn-secondary" onclick="loadDraft()">Load Draft</button>
-        <button class="btn btn-secondary" onclick="saveDraft()">Save Draft</button>
-        <button class="btn" onclick="window.print()">Print / Export PDF</button>
-      </div>
-    </div>
-  </div>
+            <!-- Summary / Objective -->
+            <div class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">2. Professional Summary</h3>
+                <textarea id="inputSummary" rows="3" placeholder="Brief summary of your professional background and core strengths..." oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
+            </div>
 
-  <script>
-    let experiences = [
-      { role: "Software Developer", company: "Tech Solutions", period: "2024 - Present", details: "Developed and deployed scalable web applications." }
-    ];
+            <!-- Experience -->
+            <div class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">3. Work Experience</h3>
+                <textarea id="inputExperience" rows="4" placeholder="Company A - Job Title (Year - Year)&#10;• Key responsibility or achievement 1&#10;• Key responsibility or achievement 2" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
+            </div>
 
-    let educations = [
-      { degree: "Bachelor of Science in Information Technology", school: "University", period: "2020 - 2024" }
-    ];
+            <!-- Education -->
+            <div class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">4. Education</h3>
+                <textarea id="inputEducation" rows="3" placeholder="University Name - Degree/Course (Graduation Year)&#10;• Honors or relevant coursework" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
+            </div>
 
-    function renderExperience() {
-      const container = document.getElementById('experienceContainer');
-      container.innerHTML = '';
+            <!-- Skills -->
+            <div class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">5. Skills</h3>
+                <input type="text" id="inputSkills" placeholder="JavaScript, Python, Project Management, UI/UX" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none">
+            </div>
 
-      experiences.forEach((exp, idx) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'dynamic-item';
+            <!-- CV Specific Sections (Conditional) -->
+            <div id="cvExtraSection" class="space-y-3 pt-3 border-t">
+                <h3 class="text-sm font-bold text-cyan-700 uppercase tracking-wider">6. CV Extra Sections (Research / Certs)</h3>
+                <textarea id="inputCertifications" rows="2" placeholder="Certifications & Licenses (e.g. AWS Certified Developer)" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
+                <textarea id="inputPublications" rows="2" placeholder="Research Publications or Notable Projects" oninput="updatePreview()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"></textarea>
+            </div>
+        </section>
 
-        // Top Header inside item
-        const topRow = document.createElement('div');
-        topRow.className = 'no-print';
-        topRow.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;';
-        
-        const labelNum = document.createElement('span');
-        labelNum.style.cssText = 'font-size: 12px; font-weight: bold; color: var(--text-muted);';
-        labelNum.innerText = `Role #${idx + 1}`;
-        topRow.appendChild(labelNum);
+        <!-- Right Column: Live Preview Paper -->
+        <section class="lg:col-span-7 flex justify-center items-start">
+            <div id="previewContainer" class="print-container bg-white w-full max-w-3xl min-h-[1000px] p-8 sm:p-12 shadow-md rounded-xl border border-slate-200 flex flex-col text-slate-800">
+                
+                <!-- Header Preview -->
+                <div class="border-b pb-4 mb-5 text-center sm:text-left">
+                    <h1 id="prevName" class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Your Name</h1>
+                    <p id="prevTitle" class="text-base font-medium text-cyan-700 mt-0.5">Professional Title</p>
+                    <div id="prevContact" class="text-xs text-slate-500 flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-1 mt-2">
+                        <span id="prevEmail">email@example.com</span> • 
+                        <span id="prevPhone">+63 900 000 0000</span> • 
+                        <span id="prevLocation">City, Country</span>
+                    </div>
+                </div>
 
-        const btnRemove = document.createElement('button');
-        btnRemove.className = 'btn-danger';
-        btnRemove.innerText = 'Remove';
-        btnRemove.onclick = () => removeExperience(idx);
-        topRow.appendChild(btnRemove);
-        itemDiv.appendChild(topRow);
+                <!-- Summary Preview -->
+                <div id="summaryBlock" class="mb-5">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Professional Summary</h2>
+                    <p id="prevSummary" class="text-sm text-slate-700 leading-relaxed whitespace-pre-line">Write a summary to see it formatted cleanly here.</p>
+                </div>
 
-        // Inputs Grid (Role & Company)
-        const grid = document.createElement('div');
-        grid.className = 'grid-2';
-        grid.style.marginBottom = '12px';
+                <!-- Experience Preview -->
+                <div id="experienceBlock" class="mb-5">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Work Experience</h2>
+                    <div id="prevExperience" class="text-sm text-slate-700 whitespace-pre-line space-y-2">Detail your work experience on the left panel.</div>
+                </div>
 
-        const fgRole = document.createElement('div');
-        fgRole.className = 'field-group';
-        const lblRole = document.createElement('label');
-        lblRole.innerText = 'Job Title';
-        const inputRole = document.createElement('input');
-        inputRole.type = 'text';
-        inputRole.value = exp.role;
-        inputRole.oninput = (e) => { experiences[idx].role = e.target.value; };
-        fgRole.appendChild(lblRole);
-        fgRole.appendChild(inputRole);
-        grid.appendChild(fgRole);
+                <!-- Education Preview -->
+                <div id="educationBlock" class="mb-5">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Education</h2>
+                    <div id="prevEducation" class="text-sm text-slate-700 whitespace-pre-line space-y-2">List your academic history on the left panel.</div>
+                </div>
 
-        const fgComp = document.createElement('div');
-        fgComp.className = 'field-group';
-        const lblComp = document.createElement('label');
-        lblComp.innerText = 'Company / Organization';
-        const inputComp = document.createElement('input');
-        inputComp.type = 'text';
-        inputComp.value = exp.company;
-        inputComp.oninput = (e) => { experiences[idx].company = e.target.value; };
-        fgComp.appendChild(lblComp);
-        fgComp.appendChild(inputComp);
-        grid.appendChild(fgComp);
+                <!-- Skills Preview -->
+                <div id="skillsBlock" class="mb-5">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Skills</h2>
+                    <p id="prevSkills" class="text-sm text-slate-700">List core skills separated by commas.</p>
+                </div>
 
-        itemDiv.appendChild(grid);
+                <!-- CV Extra Section Preview -->
+                <div id="cvExtraBlock" class="space-y-4">
+                    <div>
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Certifications & Licenses</h2>
+                        <div id="prevCertifications" class="text-sm text-slate-700 whitespace-pre-line">Add your certifications here.</div>
+                    </div>
+                    <div>
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Publications & Projects</h2>
+                        <div id="prevPublications" class="text-sm text-slate-700 whitespace-pre-line">Add notable publications or projects here.</div>
+                    </div>
+                </div>
 
-        // Period Field
-        const fgPeriod = document.createElement('div');
-        fgPeriod.className = 'field-group';
-        fgPeriod.style.marginBottom = '12px';
-        const lblPeriod = document.createElement('label');
-        lblPeriod.innerText = 'Period';
-        const inputPeriod = document.createElement('input');
-        inputPeriod.type = 'text';
-        inputPeriod.value = exp.period;
-        inputPeriod.oninput = (e) => { experiences[idx].period = e.target.value; };
-        fgPeriod.appendChild(lblPeriod);
-        fgPeriod.appendChild(inputPeriod);
-        itemDiv.appendChild(fgPeriod);
+            </div>
+        </section>
 
-        // Details Field
-        const fgDetails = document.createElement('div');
-        fgDetails.className = 'field-group';
-        const lblDetails = document.createElement('label');
-        lblDetails.innerText = 'Key Responsibilities & Achievements';
-        const textDetails = document.createElement('textarea');
-        textDetails.rows = 2;
-        textDetails.value = exp.details;
-        textDetails.oninput = (e) => { experiences[idx].details = e.target.value; };
-        fgDetails.appendChild(lblDetails);
-        fgDetails.appendChild(textDetails);
-        itemDiv.appendChild(fgDetails);
+    </main>
 
-        container.appendChild(itemDiv);
-      });
-    }
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-500 no-print mt-auto">
+        HandleVault Digital • Free Browser-Based Utility • <a href="mailto:handlevault.digital@proton.me" class="text-cyan-600 hover:underline">handlevault.digital@proton.me</a>
+    </footer>
 
-    function renderEducation() {
-      const container = document.getElementById('educationContainer');
-      container.innerHTML = '';
+    <!-- JavaScript Logic -->
+    <script>
+        function toggleMode() {
+            const mode = document.getElementById('docMode').value;
+            const extraSection = document.getElementById('cvExtraSection');
+            const extraBlock = document.getElementById('cvExtraBlock');
 
-      educations.forEach((edu, idx) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'dynamic-item';
+            if (mode === 'resume') {
+                extraSection.style.display = 'none';
+                extraBlock.style.display = 'none';
+            } else {
+                extraSection.style.display = 'block';
+                extraBlock.style.display = 'block';
+            }
+        }
 
-        const topRow = document.createElement('div');
-        topRow.className = 'no-print';
-        topRow.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;';
-        
-        const labelNum = document.createElement('span');
-        labelNum.style.cssText = 'font-size: 12px; font-weight: bold; color: var(--text-muted);';
-        labelNum.innerText = `Education #${idx + 1}`;
-        topRow.appendChild(labelNum);
+        function updatePreview() {
+            // Personal Info
+            document.getElementById('prevName').innerText = document.getElementById('inputName').value || 'Your Name';
+            document.getElementById('prevTitle').innerText = document.getElementById('inputTitle').value || 'Professional Title';
+            document.getElementById('prevEmail').innerText = document.getElementById('inputEmail').value || 'email@example.com';
+            document.getElementById('prevPhone').innerText = document.getElementById('inputPhone').value || '+63 900 000 0000';
+            document.getElementById('prevLocation').innerText = document.getElementById('inputLocation').value || 'City, Country';
 
-        const btnRemove = document.createElement('button');
-        btnRemove.className = 'btn-danger';
-        btnRemove.innerText = 'Remove';
-        btnRemove.onclick = () => removeEducation(idx);
-        topRow.appendChild(btnRemove);
-        itemDiv.appendChild(topRow);
+            // Sections
+            document.getElementById('prevSummary').innerText = document.getElementById('inputSummary').value || 'Write a summary to see it formatted cleanly here.';
+            document.getElementById('prevExperience').innerText = document.getElementById('inputExperience').value || 'Detail your work experience on the left panel.';
+            document.getElementById('prevEducation').innerText = document.getElementById('inputEducation').value || 'List your academic history on the left panel.';
+            document.getElementById('prevSkills').innerText = document.getElementById('inputSkills').value || 'List core skills separated by commas.';
+            document.getElementById('prevCertifications').innerText = document.getElementById('inputCertifications').value || 'Add your certifications here.';
+            document.getElementById('prevPublications').innerText = document.getElementById('inputPublications').value || 'Add notable publications or projects here.';
+        }
 
-        const grid = document.createElement('div');
-        grid.className = 'grid-2';
-        grid.style.marginBottom = '12px';
-
-        const fgDeg = document.createElement('div');
-        fgDeg.className = 'field-group';
-        const lblDeg = document.createElement('label');
-        lblDeg.innerText = 'Degree / Course';
-        const inputDeg = document.createElement('input');
-        inputDeg.type = 'text';
-        inputDeg.value = edu.degree;
-        inputDeg.oninput = (e) => { educations[idx].degree = e.target.value; };
-        fgDeg.appendChild(lblDeg);
-        fgDeg.appendChild(inputDeg);
-        grid.appendChild(fgDeg);
-
-        const fgSch = document.createElement('div');
-        fgSch.className = 'field-group';
-        const lblSch = document.createElement('label');
-        lblSch.innerText = 'School / Institution';
-        const inputSch = document.createElement('input');
-        inputSch.type = 'text';
-        inputSch.value = edu.school;
-        inputSch.oninput = (e) => { educations[idx].school = e.target.value; };
-        fgSch.appendChild(lblSch);
-        fgSch.appendChild(inputSch);
-        grid.appendChild(fgSch);
-
-        itemDiv.appendChild(grid);
-
-        const fgPeriod = document.createElement('div');
-        fgPeriod.className = 'field-group';
-        const lblPeriod = document.createElement('label');
-        lblPeriod.innerText = 'Period';
-        const inputPeriod = document.createElement('input');
-        inputPeriod.type = 'text';
-        inputPeriod.value = edu.period;
-        inputPeriod.oninput = (e) => { educations[idx].period = e.target.value; };
-        fgPeriod.appendChild(lblPeriod);
-        fgPeriod.appendChild(inputPeriod);
-        itemDiv.appendChild(fgPeriod);
-
-        container.appendChild(itemDiv);
-      });
-    }
-
-    function addExperience() {
-      experiences.push({ role: "", company: "", period: "", details: "" });
-      renderExperience();
-    }
-    function removeExperience(idx) {
-      experiences.splice(idx, 1);
-      renderExperience();
-    }
-
-    function addEducation() {
-      educations.push({ degree: "", school: "", period: "" });
-      renderEducation();
-    }
-    function removeEducation(idx) {
-      educations.splice(idx, 1);
-      renderEducation();
-    }
-
-    function saveDraft() {
-      const data = {
-        fullName: document.getElementById('fullName').value,
-        jobTitle: document.getElementById('jobTitle').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        summary: document.getElementById('summary').value,
-        experiences,
-        educations
-      };
-      localStorage.setItem('resume_draft', JSON.stringify(data));
-      alert('Resume draft saved successfully in browser!');
-    }
-
-    function loadDraft() {
-      const saved = localStorage.getItem('resume_draft');
-      if (saved) {
-        const data = JSON.parse(saved);
-        document.getElementById('fullName').value = data.fullName || '';
-        document.getElementById('jobTitle').value = data.jobTitle || '';
-        document.getElementById('email').value = data.email || '';
-        document.getElementById('phone').value = data.phone || '';
-        document.getElementById('summary').value = data.summary || '';
-        if (data.experiences && data.experiences.length) experiences = data.experiences;
-        if (data.educations && data.educations.length) educations = data.educations;
-        renderExperience();
-        renderEducation();
-        alert('Resume draft loaded successfully!');
-      } else {
-        alert('No saved resume draft found.');
-      }
-    }
-
-    window.onload = () => {
-      const saved = localStorage.getItem('resume_draft');
-      if (saved) {
-        loadDraft();
-      } else {
-        renderExperience();
-        renderEducation();
-      }
-    };
-  </script>
+        // Initialize default view
+        toggleMode();
+    </script>
 </body>
-</html>
+                                                             </html>
+                                                             
