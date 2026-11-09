@@ -201,4 +201,19 @@ function printResumePDF() {
 
 // Initial call
 toggleMode();
-    
+
+}
+
+// 9. Direktang ikinakabit ang mga buttons gamit ang kanilang ID para siguradong gagana
+document.addEventListener('DOMContentLoaded', function() {
+    const saveBtn = document.getElementById('saveBtn');
+    const loadBtn = document.getElementById('loadBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const printBtn = document.getElementById('printBtn');
+
+    if (saveBtn) saveBtn.addEventListener('click', saveResumeDraft);
+    if (loadBtn) loadBtn.addEventListener('click', loadResumeDraft);
+    if (shareBtn) shareBtn.addEventListener('click', shareMyCV);
+    if (printBtn) printBtn.addEventListener('click', printResumePDF);
+});
+
