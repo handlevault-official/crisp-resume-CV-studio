@@ -118,7 +118,6 @@
       position: relative;
     }
 
-    /* Buttons */
     .btn {
       background: var(--accent);
       color: white;
@@ -254,6 +253,7 @@
       </a>
       
       <div class="action-buttons-group">
+        <button class="btn btn-secondary" onclick="loadDraft()">Load Draft</button>
         <button class="btn btn-secondary" onclick="saveDraft()">Save Draft</button>
         <button class="btn" onclick="window.print()">Print / Export PDF</button>
       </div>
@@ -272,43 +272,157 @@
     function renderExperience() {
       const container = document.getElementById('experienceContainer');
       container.innerHTML = '';
+
       experiences.forEach((exp, idx) => {
-        const div = document.createElement('div');
-        div.className = 'dynamic-item';
-        div.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;" class="no-print">
-            <span style="font-size: 12px; font-weight: bold; color: var(--text-muted);">Role #${idx + 1}</span>
-            <button class="btn-danger" onclick="removeExperience(${idx})">Remove</button>
-          </div>
-          <div class="grid-2" style="margin-bottom: 12px;">
-            <div class="field-group"><label>Job Title</label><input type="text" value="${exp.role}" oninput="updateExp(${idx}, 'role', this.value)" /></div>
-            <div class="field-group"><label>Company / Organization</label><input type="text" value="${exp.company}" oninput="updateExp(${idx}, 'company', this.value)" /></div>
-          </div>
-          <div class="field-group" style="margin-bottom: 12px;"><label>Period</label><input type="text" value="${exp.period}" oninput="updateExp(${idx}, 'period', this.value)" /></div>
-          <div class="field-group"><label>Key Responsibilities & Achievements</label><textarea rows="2" oninput="updateExp(${idx}, 'details', this.value)">${exp.details}</textarea></div>
-        `;
-        container.appendChild(div);
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'dynamic-item';
+
+        // Top Header inside item
+        const topRow = document.createElement('div');
+        topRow.className = 'no-print';
+        topRow.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;';
+        
+        const labelNum = document.createElement('span');
+        labelNum.style.cssText = 'font-size: 12px; font-weight: bold; color: var(--text-muted);';
+        labelNum.innerText = `Role #${idx + 1}`;
+        topRow.appendChild(labelNum);
+
+        const btnRemove = document.createElement('button');
+        btnRemove.className = 'btn-danger';
+        btnRemove.innerText = 'Remove';
+        btnRemove.onclick = () => removeExperience(idx);
+        topRow.appendChild(btnRemove);
+        itemDiv.appendChild(topRow);
+
+        // Inputs Grid (Role & Company)
+        const grid = document.createElement('div');
+        grid.className = 'grid-2';
+        grid.style.marginBottom = '12px';
+
+        const fgRole = document.createElement('div');
+        fgRole.className = 'field-group';
+        const lblRole = document.createElement('label');
+        lblRole.innerText = 'Job Title';
+        const inputRole = document.createElement('input');
+        inputRole.type = 'text';
+        inputRole.value = exp.role;
+        inputRole.oninput = (e) => { experiences[idx].role = e.target.value; };
+        fgRole.appendChild(lblRole);
+        fgRole.appendChild(inputRole);
+        grid.appendChild(fgRole);
+
+        const fgComp = document.createElement('div');
+        fgComp.className = 'field-group';
+        const lblComp = document.createElement('label');
+        lblComp.innerText = 'Company / Organization';
+        const inputComp = document.createElement('input');
+        inputComp.type = 'text';
+        inputComp.value = exp.company;
+        inputComp.oninput = (e) => { experiences[idx].company = e.target.value; };
+        fgComp.appendChild(lblComp);
+        fgComp.appendChild(inputComp);
+        grid.appendChild(fgComp);
+
+        itemDiv.appendChild(grid);
+
+        // Period Field
+        const fgPeriod = document.createElement('div');
+        fgPeriod.className = 'field-group';
+        fgPeriod.style.marginBottom = '12px';
+        const lblPeriod = document.createElement('label');
+        lblPeriod.innerText = 'Period';
+        const inputPeriod = document.createElement('input');
+        inputPeriod.type = 'text';
+        inputPeriod.value = exp.period;
+        inputPeriod.oninput = (e) => { experiences[idx].period = e.target.value; };
+        fgPeriod.appendChild(lblPeriod);
+        fgPeriod.appendChild(inputPeriod);
+        itemDiv.appendChild(fgPeriod);
+
+        // Details Field
+        const fgDetails = document.createElement('div');
+        fgDetails.className = 'field-group';
+        const lblDetails = document.createElement('label');
+        lblDetails.innerText = 'Key Responsibilities & Achievements';
+        const textDetails = document.createElement('textarea');
+        textDetails.rows = 2;
+        textDetails.value = exp.details;
+        textDetails.oninput = (e) => { experiences[idx].details = e.target.value; };
+        fgDetails.appendChild(lblDetails);
+        fgDetails.appendChild(textDetails);
+        itemDiv.appendChild(fgDetails);
+
+        container.appendChild(itemDiv);
       });
     }
 
     function renderEducation() {
       const container = document.getElementById('educationContainer');
       container.innerHTML = '';
+
       educations.forEach((edu, idx) => {
-        const div = document.createElement('div');
-        div.className = 'dynamic-item';
-        div.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;" class="no-print">
-            <span style="font-size: 12px; font-weight: bold; color: var(--text-muted);">Education #${idx + 1}</span>
-            <button class="btn-danger" onclick="removeEducation(${idx})">Remove</button>
-          </div>
-          <div class="grid-2" style="margin-bottom: 12px;">
-            <div class="field-group"><label>Degree / Course</label><input type="text" value="${edu.degree}" oninput="updateEdu(${idx}, 'degree', this.value)" /></div>
-            <div class="field-group"><label>School / Institution</label><input type="text" value="${edu.school}" oninput="updateEdu(${idx}, 'school', this.value)" /></div>
-          </div>
-          <div class="field-group"><label>Period</label><input type="text" value="${edu.period}" oninput="updateEdu(${idx}, 'period', this.value)" /></div>
-        `;
-        container.appendChild(div);
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'dynamic-item';
+
+        const topRow = document.createElement('div');
+        topRow.className = 'no-print';
+        topRow.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;';
+        
+        const labelNum = document.createElement('span');
+        labelNum.style.cssText = 'font-size: 12px; font-weight: bold; color: var(--text-muted);';
+        labelNum.innerText = `Education #${idx + 1}`;
+        topRow.appendChild(labelNum);
+
+        const btnRemove = document.createElement('button');
+        btnRemove.className = 'btn-danger';
+        btnRemove.innerText = 'Remove';
+        btnRemove.onclick = () => removeEducation(idx);
+        topRow.appendChild(btnRemove);
+        itemDiv.appendChild(topRow);
+
+        const grid = document.createElement('div');
+        grid.className = 'grid-2';
+        grid.style.marginBottom = '12px';
+
+        const fgDeg = document.createElement('div');
+        fgDeg.className = 'field-group';
+        const lblDeg = document.createElement('label');
+        lblDeg.innerText = 'Degree / Course';
+        const inputDeg = document.createElement('input');
+        inputDeg.type = 'text';
+        inputDeg.value = edu.degree;
+        inputDeg.oninput = (e) => { educations[idx].degree = e.target.value; };
+        fgDeg.appendChild(lblDeg);
+        fgDeg.appendChild(inputDeg);
+        grid.appendChild(fgDeg);
+
+        const fgSch = document.createElement('div');
+        fgSch.className = 'field-group';
+        const lblSch = document.createElement('label');
+        lblSch.innerText = 'School / Institution';
+        const inputSch = document.createElement('input');
+        inputSch.type = 'text';
+        inputSch.value = edu.school;
+        inputSch.oninput = (e) => { educations[idx].school = e.target.value; };
+        fgSch.appendChild(lblSch);
+        fgSch.appendChild(inputSch);
+        grid.appendChild(fgSch);
+
+        itemDiv.appendChild(grid);
+
+        const fgPeriod = document.createElement('div');
+        fgPeriod.className = 'field-group';
+        const lblPeriod = document.createElement('label');
+        lblPeriod.innerText = 'Period';
+        const inputPeriod = document.createElement('input');
+        inputPeriod.type = 'text';
+        inputPeriod.value = edu.period;
+        inputPeriod.oninput = (e) => { educations[idx].period = e.target.value; };
+        fgPeriod.appendChild(lblPeriod);
+        fgPeriod.appendChild(inputPeriod);
+        itemDiv.appendChild(fgPeriod);
+
+        container.appendChild(itemDiv);
       });
     }
 
@@ -320,7 +434,6 @@
       experiences.splice(idx, 1);
       renderExperience();
     }
-    function updateExp(idx, field, val) { experiences[idx][field] = val; }
 
     function addEducation() {
       educations.push({ degree: "", school: "", period: "" });
@@ -330,7 +443,6 @@
       educations.splice(idx, 1);
       renderEducation();
     }
-    function updateEdu(idx, field, val) { educations[idx][field] = val; }
 
     function saveDraft() {
       const data = {
@@ -357,15 +469,23 @@
         document.getElementById('summary').value = data.summary || '';
         if (data.experiences && data.experiences.length) experiences = data.experiences;
         if (data.educations && data.educations.length) educations = data.educations;
+        renderExperience();
+        renderEducation();
+        alert('Resume draft loaded successfully!');
+      } else {
+        alert('No saved resume draft found.');
       }
     }
 
     window.onload = () => {
-      loadDraft();
-      renderExperience();
-      renderEducation();
+      const saved = localStorage.getItem('resume_draft');
+      if (saved) {
+        loadDraft();
+      } else {
+        renderExperience();
+        renderEducation();
+      }
     };
   </script>
 </body>
 </html>
-
