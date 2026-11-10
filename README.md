@@ -1,4 +1,4 @@
-# 📄 Crisp Resume & CV Studio (v1.0 Official)
+# 📄 Crisp Resume & CV Studio
 
 A modern, fast, and local-first resume creation studio built for the **Crisp Suite**. Craft clean, professional resumes with instant live previews and zero data leaks.
 
