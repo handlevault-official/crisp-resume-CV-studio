@@ -2,7 +2,7 @@
 
 A modern, fast, and local-first resume creation studio built for the **Crisp Suite**. Craft clean, professional resumes with instant live previews and zero data leaks.
 
-## ✨ Core Features (v1.0)
+## ✨ Core Features
 * **Live Preview:** See your resume update in real-time as you type your details.
 * **Dynamic Sections:** Easily add and manage work experience, education, and skills.
 * **Theme & Layout Options:** Switch between professional styling and paper sizes instantly.
