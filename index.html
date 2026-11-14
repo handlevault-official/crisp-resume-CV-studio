@@ -552,13 +552,15 @@
             setStatus("📥 Resume data exported as JSON!");
         }
 
-        // Event Listeners
         document.getElementById('saveButton').addEventListener('click', saveDraft);
         document.getElementById('loadCloudButton').addEventListener('click', loadFromCloud);
         document.getElementById('exportJsonButton').addEventListener('click', exportJson);
         document.getElementById('printButton').addEventListener('click', () => { window.print(); });
 
         updatePreview();
-    </script>
+    </script> <!-- I-close mo muna ang JavaScript tag dito -->
+
+    <!-- I-link mo dito ang repo.js -->
+    <script src="repo.js"></script>
 </body>
 </html>
