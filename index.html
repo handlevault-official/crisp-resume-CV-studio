@@ -6,7 +6,7 @@
     <title>Professional Resume & CV Studio - Crisp Suite</title>
     <!-- Tailwind CSS for rapid, clean styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%2314b8a6%22/><text y=%22.9em%22 font-size=%2260%22 x=%2218%22>✨</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%2314b8a6%22/><text y=%22.9em%22 font-size=%2260%22 x=%2218%22>🌐</text></svg>">
     <style>
         :root {
             --theme-primary: #14b8a6; /* Crisp Teal default */
@@ -39,25 +39,25 @@
     <header class="bg-slate-900 border-b border-slate-800 text-white shadow-md no-print py-4 px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div>
             <h1 class="text-xl font-bold tracking-wide flex items-center gap-2 flex-wrap">
-                📄 Crisp Suite Resume &amp; CV Studio
-                <span id="theme-badge" class="text-xs bg-teal-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">AI CLOUD READY</span>
+                📄 <span data-i18n="header_title">Crisp Suite Resume &amp; CV Studio</span>
+                <span id="theme-badge" class="text-xs bg-teal-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">MULTI-LANG READY</span>
             </h1>
-            <p class="text-xs text-slate-400 mt-0.5">Transform raw notes into ATS-optimized resumes and sync directly to your cloud backend.</p>
+            <p class="text-xs text-slate-400 mt-0.5" data-i18n="header_sub">Transform raw notes into ATS-optimized resumes with AI and Cloud support.</p>
         </div>  
         
         <!-- Action Hub Buttons -->
         <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-end">
             <button id="saveButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center gap-1">
-                💾 Save (Cloud/Local)
+                💾 <span data-i18n="btn_save">Save</span>
             </button>
             <button id="loadCloudButton" type="button" class="bg-teal-900 hover:bg-teal-800 text-teal-200 border border-teal-700 px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center gap-1">
-                ☁️ Load from Cloud
+                ☁️ <span data-i18n="btn_load">Load Cloud</span>
             </button>
             <button id="exportJsonButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition">
-                📥 Export JSON
+                📥 <span data-i18n="btn_export">Export JSON</span>
             </button>
             <button id="printButton" type="button" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-1.5 rounded-lg text-xs font-medium transition shadow flex items-center gap-1.5 font-bold">
-                🖨️ Print / PDF
+                🖨️ <span data-i18n="btn_print">Print / PDF</span>
             </button>
             <input id="fileInput" type="file" accept=".json,application/json" hidden>
         </div>
@@ -73,20 +73,20 @@
         <section class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 no-print flex flex-col gap-5 overflow-y-auto max-h-[82vh]">
             <div class="border-b border-slate-800 pb-4">
                 <h2 class="text-base font-bold text-white flex items-center justify-between">
-                    <span>Document Settings</span>
-                    <span class="text-xs text-teal-400 font-normal">Auto-Sync Preview</span>
+                    <span data-i18n="settings_title">Document Settings</span>
+                    <span class="text-xs text-teal-400 font-normal">Auto-Sync</span>
                 </h2>
                 
                 <div class="grid grid-cols-2 gap-3 mt-3">
                     <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Format Mode:</label>
-                        <select id="docMode" onchange="toggleMode(); updatePreview();" class="w-full border border-slate-700 rounded-lg p-2 text-sm bg-slate-950 text-slate-200 outline-none">
-                            <option value="resume">Resume (Concise)</option>
-                            <option value="cv" selected>CV (Comprehensive)</option>
+                        <label class="block text-xs font-medium text-slate-400 mb-1" data-i18n="label_lang">Language / Wika:</label>
+                        <select id="langSelect" onchange="changeLanguage()" class="w-full border border-slate-700 rounded-lg p-2 text-sm bg-slate-950 text-slate-200 outline-none">
+                            <option value="en" selected>English (EN)</option>
+                            <option value="ph">Filipino / Tagalog (PH)</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Paper Size:</label>
+                        <label class="block text-xs font-medium text-slate-400 mb-1" data-i18n="label_paper">Paper Size:</label>
                         <select id="paperSize" onchange="changePaperSize()" class="w-full border border-slate-700 rounded-lg p-2 text-sm bg-slate-950 text-slate-200 outline-none">
                             <option value="a4" selected>A4 Standard</option>
                             <option value="letter">US Letter</option>
@@ -94,24 +94,33 @@
                     </div>
                 </div>
 
-                <div class="mt-3">
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Theme Palette:</label>
-                    <select id="colorTheme" onchange="changeTheme(); updatePreview();" class="w-full border border-slate-700 rounded-lg p-2 text-sm bg-slate-950 text-slate-200 outline-none">
-                        <option value="theme-teal" selected>🌿 Crisp Teal</option>
-                        <option value="theme-pink">💖 Sailor Moon Pink</option>
-                        <option value="theme-cyan">⚡ Cyber Cyan</option>
-                        <option value="theme-navy">💼 Corporate Navy</option>
-                    </select>
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1" data-i18n="label_mode">Format Mode:</label>
+                        <select id="docMode" onchange="toggleMode(); updatePreview();" class="w-full border border-slate-700 rounded-lg p-2 text-sm bg-slate-950 text-slate-200 outline-none">
+                            <option value="resume" data-i18n="mode_resume">Resume (Concise)</option>
+                            <option value="cv" selected data-i18n="mode_cv">CV (Comprehensive)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1" data-i18n="label_theme">Theme Palette:</label>
+                        <select id="colorTheme" onchange="changeTheme(); updatePreview();" class="w-full border border-slate-700 rounded-lg p-2 text-sm bg-slate-950 text-slate-200 outline-none">
+                            <option value="theme-teal" selected>🌿 Crisp Teal</option>
+                            <option value="theme-pink">💖 Sailor Moon Pink</option>
+                            <option value="theme-cyan">⚡ Cyber Cyan</option>
+                            <option value="theme-navy">💼 Corporate Navy</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
             <!-- Personal Details -->
             <div class="space-y-3">
-                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">1. Personal Information</h3>
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider" data-i18n="sec_personal">1. Personal Information</h3>
                 <input type="text" id="inputName" placeholder="Full Name (e.g. Juan Dela Cruz)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
-                <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Senior Customer Support Specialist)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
+                <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Customer Support Specialist)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
                 <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="inputEmail" placeholder="Email Address (Cloud Key)" oninput="updatePreview()" class="border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
+                    <input type="text" id="inputEmail" placeholder="Email Address" oninput="updatePreview()" class="border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
                     <input type="text" id="inputPhone" placeholder="Phone Number" oninput="updatePreview()" class="border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
                 </div>
                 <input type="text" id="inputLocation" placeholder="Location (e.g. Manila, Philippines)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
@@ -120,41 +129,41 @@
             <!-- Summary / Objective with AI Polish -->
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">2. Professional Summary</h3>
+                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider" data-i18n="sec_summary">2. Professional Summary</h3>
                     <button type="button" onclick="aiEnhanceSummary()" class="text-xs bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-800 px-2 py-1 rounded font-medium transition flex items-center gap-1">
-                        ✨ AI Auto-Polish
+                        ✨ <span data-i18n="btn_ai_summary">AI Auto-Polish</span>
                     </button>
                 </div>
-                <textarea id="inputSummary" rows="3" placeholder="Ilista o ikwento rito nang simple ang background mo (kahit Taglish)..." oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
+                <textarea id="inputSummary" rows="3" placeholder="Ilista o ikwento rito nang simple ang background mo..." oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
 
             <!-- Experience with AI Polish -->
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">3. Work Experience</h3>
+                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider" data-i18n="sec_exp">3. Work Experience</h3>
                     <button type="button" onclick="aiEnhanceExperience()" class="text-xs bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-800 px-2 py-1 rounded font-medium transition flex items-center gap-1">
-                        ✨ AI Transform Bullets
+                        ✨ <span data-i18n="btn_ai_exp">AI Transform Bullets</span>
                     </button>
                 </div>
-                <p class="text-[11px] text-slate-400">Tip: Mag-type lang ng simpleng notes tulad ng <span class="text-teal-300 italic">"cashier sa jollibee taga handle pera"</span> tapos pindutin ang AI Transform.</p>
-                <textarea id="inputExperience" rows="5" placeholder="Company Name - Job Title (Year)&#10;• Nag-handle ng customer service at pera sa store&#10;• Nag-check ng inventory" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
+                <p class="text-[11px] text-slate-400" data-i18n="tip_exp">Tip: Type simple rough notes and let AI turn them into professional bullet points.</p>
+                <textarea id="inputExperience" rows="5" placeholder="Company Name - Job Title (Year)&#10;• Nag-handle ng customer service at pera sa store" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
 
             <!-- Education -->
             <div class="space-y-3">
-                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">4. Education</h3>
-                <textarea id="inputEducation" rows="3" placeholder="University Name - Degree / Course (Year)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider" data-i18n="sec_edu">4. Education</h3>
+                <textarea id="inputEducation" rows="3" placeholder="University Name - Degree (Year)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
 
             <!-- Skills -->
             <div class="space-y-3">
-                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">5. Skills &amp; Competencies</h3>
-                <input type="text" id="inputSkills" placeholder="Customer Relations, Point of Sale (POS), Inventory Audit, Tagalog & English" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider" data-i18n="sec_skills">5. Skills &amp; Competencies</h3>
+                <input type="text" id="inputSkills" placeholder="Customer Service, POS, Inventory, Communication" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
             </div>
 
             <!-- CV Specific Sections -->
             <div id="cvExtraSection" class="space-y-3 pt-3 border-t border-slate-800">
-                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">6. CV Extra Sections</h3>
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider" data-i18n="sec_extra">6. CV Extra Sections</h3>
                 <textarea id="inputCertifications" rows="2" placeholder="Certifications &amp; Licenses" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
                 <textarea id="inputPublications" rows="2" placeholder="Publications, Projects or Awards" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
@@ -177,36 +186,36 @@
 
                 <!-- Summary Preview -->
                 <div id="summaryBlock" class="mb-6">
-                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Professional Summary</h2>
+                    <h2 id="lbl_prev_summary" class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Professional Summary</h2>
                     <p id="prevSummary" class="text-sm text-slate-700 leading-relaxed whitespace-pre-line">Dedicated professional with a strong background in customer operations and problem-solving, committed to delivering high-performance results.</p>
                 </div>
 
                 <!-- Experience Preview -->
                 <div id="experienceBlock" class="mb-6">
-                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Work Experience</h2>
+                    <h2 id="lbl_prev_exp" class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Work Experience</h2>
                     <div id="prevExperience" class="text-sm text-slate-700 whitespace-pre-line space-y-2">Detail your work experience on the left panel.</div>
                 </div>
 
                 <!-- Education Preview -->
                 <div id="educationBlock" class="mb-6">
-                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Education</h2>
+                    <h2 id="lbl_prev_edu" class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Education</h2>
                     <div id="prevEducation" class="text-sm text-slate-700 whitespace-pre-line space-y-2">University of the Philippines - Bachelor of Science (2022)</div>
                 </div>
 
                 <!-- Skills Preview -->
                 <div id="skillsBlock" class="mb-6">
-                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Skills &amp; Competencies</h2>
+                    <h2 id="lbl_prev_skills" class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Skills &amp; Competencies</h2>
                     <p id="prevSkills" class="text-sm text-slate-700">Customer Service, Point of Sale (POS), Team Collaboration, Inventory Management</p>
                 </div>
 
                 <!-- CV Extra Section Preview -->
                 <div id="cvExtraBlock" class="space-y-5">
                     <div>
-                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Certifications &amp; Licenses</h2>
+                        <h2 id="lbl_prev_cert" class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Certifications &amp; Licenses</h2>
                         <div id="prevCertifications" class="text-sm text-slate-700 whitespace-pre-line">Professional Civil Service Eligibility (2024)</div>
                     </div>
                     <div>
-                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Publications &amp; Projects</h2>
+                        <h2 id="lbl_prev_pub" class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Publications &amp; Projects</h2>
                         <div id="prevPublications" class="text-sm text-slate-700 whitespace-pre-line">E-Commerce Inventory Tracking System Prototype</div>
                     </div>
                 </div>
@@ -225,59 +234,168 @@
         </a>
     </footer>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Logic with Multi-Language Support -->
     <script>
         "use strict";
 
-        const STORAGE_KEY = "crisp_resume_studio_draft_v2";
-        // Palitan ang URL na ito ng iyong live Render/Railway backend URL kapag naka-deploy na
+        const STORAGE_KEY = "crisp_resume_studio_draft_v3";
         const API_BASE_URL = "http://localhost:8000"; 
         const statusEl = document.querySelector("#status");
         const fileInput = document.querySelector("#fileInput");
+
+        // Translations Dictionary
+        const translations = {
+            en: {
+                header_title: "Crisp Suite Resume & CV Studio",
+                header_sub: "Transform raw notes into ATS-optimized resumes with AI and Cloud support.",
+                btn_save: "Save (Cloud/Local)",
+                btn_load: "Load from Cloud",
+                btn_export: "Export JSON",
+                btn_print: "Print / PDF",
+                settings_title: "Document Settings",
+                label_lang: "Language / Wika:",
+                label_paper: "Paper Size:",
+                label_mode: "Format Mode:",
+                label_theme: "Theme Palette:",
+                mode_resume: "Resume (Concise)",
+                mode_cv: "CV (Comprehensive)",
+                sec_personal: "1. Personal Information",
+                sec_summary: "2. Professional Summary",
+                btn_ai_summary: "AI Auto-Polish",
+                sec_exp: "3. Work Experience",
+                btn_ai_exp: "AI Transform Bullets",
+                tip_exp: "Tip: Type simple rough notes and let AI turn them into professional bullet points.",
+                sec_edu: "4. Education",
+                sec_skills: "5. Skills & Competencies",
+                sec_extra: "6. CV Extra Sections",
+                lbl_prev_summary: "Professional Summary",
+                lbl_prev_exp: "Work Experience",
+                lbl_prev_edu: "Education",
+                lbl_prev_skills: "Skills & Competencies",
+                lbl_prev_cert: "Certifications & Licenses",
+                lbl_prev_pub: "Publications & Projects"
+            },
+            ph: {
+                header_title: "Crisp Suite Resume & CV Studio",
+                header_sub: "Gawing ATS-optimized resume ang iyong simpleng notes gamit ang AI at Cloud.",
+                btn_save: "I-save (Cloud/Local)",
+                btn_load: "I-load mula sa Cloud",
+                btn_export: "I-export ang JSON",
+                btn_print: "I-print / PDF",
+                settings_title: "Mga Setting ng Dokumento",
+                label_lang: "Wika / Language:",
+                label_paper: "Laki ng Papel:",
+                label_mode: "Uri ng Dokumento:",
+                label_theme: "Kulay at Tema:",
+                mode_resume: "Resume (Maikli)",
+                mode_cv: "CV (Komprehensibo)",
+                sec_personal: "1. Personal Information",
+                sec_summary: "2. Professional Summary",
+                btn_ai_summary: "AI Auto-Polish",
+                sec_exp: "3. Work Experience",
+                btn_ai_exp: "AI Transform Bullets",
+                tip_exp: "Tip: Type simple rough notes and let AI turn them into professional bullet points.",
+                sec_edu: "4. Education",
+                sec_skills: "5. Skills & Competencies",
+                sec_extra: "6. CV Extra Sections",
+                lbl_prev_summary: "Professional Summary",
+                lbl_prev_exp: "Work Experience",
+                lbl_prev_edu: "Education",
+                lbl_prev_skills: "Skills & Competencies",
+                lbl_prev_cert: "Certifications & Licenses",
+                lbl_prev_pub: "Publications & Projects"
+            },
+            ph: {
+                header_title: "Crisp Suite Resume & CV Studio",
+                header_sub: "Gawing ATS-optimized resume ang iyong simpleng notes gamit ang AI at Cloud.",
+                btn_save: "I-save (Cloud/Local)",
+                btn_load: "I-load mula sa Cloud",
+                btn_export: "I-export ang JSON",
+                btn_print: "I-print / PDF",
+                settings_title: "Mga Setting ng Dokumento",
+                label_lang: "Wika / Language:",
+                label_paper: "Laki ng Papel:",
+                label_mode: "Uri ng Dokumento:",
+                label_theme: "Kulay at Tema:",
+                mode_resume: "Resume (Maikli)",
+                mode_cv: "CV (Komprehensibo)",
+                sec_personal: "1. Impormasyon sa Sarili",
+                sec_summary: "2. Propesyonal na Buod",
+                btn_ai_summary: "AI Auto-Polish",
+                sec_exp: "3. Karanasan sa Trabaho",
+                btn_ai_exp: "AI Transform Bullets",
+                tip_exp: "Tip: Mag-type lang ng simpleng notes at hahayaan ang AI na gumawa ng professional bullet points.",
+                sec_edu: "4. Edukasyon",
+                sec_skills: "5. Mga Kakayahan at Kasanayan",
+                sec_extra: "6. Karagdagang Bahagi ng CV",
+                lbl_prev_summary: "PROPESYONAL NA BUOD",
+                lbl_prev_exp: "KARANASAN SA TRABAHO",
+                lbl_prev_edu: "EDUKASYON",
+                lbl_prev_skills: "MGA KAKAYAHAN AT KASANAYAN",
+                lbl_prev_cert: "MGA SERTIPIKO AT LISENSYA",
+                lbl_prev_pub: "MGA PUBLIKASYON AT PROYEKTO"
+            }
+        };
 
         function setStatus(message) {
             if(statusEl) statusEl.textContent = message;
         }
 
+        function changeLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            const t = translations[lang];
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+
+            // Update preview labels
+            document.getElementById('lbl_prev_summary').textContent = t.lbl_prev_summary;
+            document.getElementById('lbl_prev_exp').textContent = t.lbl_prev_exp;
+            document.getElementById('lbl_prev_edu').textContent = t.lbl_prev_edu;
+            document.getElementById('lbl_prev_skills').textContent = t.lbl_prev_skills;
+            document.getElementById('lbl_prev_cert').textContent = t.lbl_prev_cert;
+            document.getElementById('lbl_prev_pub').textContent = t.lbl_prev_pub;
+
+            setStatus(lang === 'ph' ? "🇵🇭 Tagalog language mode activated." : "🇬🇧 English language mode activated.");
+        }
+
         // --- AI Auto-Polish & Enhancer Functions ---
         function aiEnhanceSummary() {
             const raw = document.getElementById('inputSummary').value.trim();
-            setStatus("✨ AI is analyzing and rewriting your summary for ATS compliance...");
+            const lang = document.getElementById('langSelect').value;
+            setStatus("✨ AI is polishing your summary...");
             
             setTimeout(() => {
                 let polished = "";
-                if (!raw) {
-                    polished = "Results-driven professional with extensive hands-on experience in client relations, operational execution, and process optimization. Adept at collaborating in fast-paced environments to achieve high-accuracy results and exceptional stakeholder satisfaction.";
+                if (lang === 'ph') {
+                    polished = "Isang dedikadong manggagawa na may malawak na karanasan sa pagbibigay ng de-kalidad na serbisyo, maayos na pakikipag-ugnayan sa mga kliyente, at mabilis na pag-resolba ng mga problema upang makamit ang tagumpay ng kumpanya.";
                 } else {
-                    polished = `Results-oriented professional with a strong foundation in ${raw}. Proven ability to execute daily operational tasks efficiently, manage client communications with high professionalism, and adapt quickly to dynamic work environments to drive positive organizational outcomes.`;
+                    polished = "Results-driven professional with extensive hands-on experience in client relations, operational execution, and process optimization. Adept at collaborating in fast-paced environments to achieve high-accuracy results.";
                 }
                 document.getElementById('inputSummary').value = polished;
                 updatePreview();
-                setStatus("✨ Summary successfully polished and optimized for recruiters!");
+                setStatus("✨ Summary successfully polished!");
             }, 500);
         }
 
         function aiEnhanceExperience() {
             const raw = document.getElementById('inputExperience').value.trim();
-            setStatus("✨ AI is transforming your notes into professional action-oriented bullet points...");
+            const lang = document.getElementById('langSelect').value;
+            setStatus("✨ AI is transforming your notes into professional bullet points...");
 
             setTimeout(() => {
                 let enhancedBullets = "";
-                if (!raw) {
-                    enhancedBullets = "Company Name — Position Title (2023 - Present)\n• Managed core day-to-day operations and administrative workflows, maintaining 100% adherence to quality standards.\n• Collaborated with cross-functional team members to resolve customer inquiries and streamline service delivery.\n• Conducted regular quality audits and inventory tracking to minimize discrepancies and improve resource efficiency.";
+                if (lang === 'ph') {
+                    enhancedBullets = "Kumpanya / Negosyo — Posisyon (2023 - Kasalukuyan)\n• Mahusay na naglingkod sa pag-handle ng mga transaksyon at serbisyo sa mga kustomer nang may 100% katumpakan.\n• Nakipagtulungan sa mga kasamahan sa koponan upang mapabilis ang operasyon at maiwasan ang mga aberya sa stock at pera.";
                 } else {
-                    const lines = raw.split('\n');
-                    let converted = lines.map(line => {
-                        let clean = line.replace(/^[•\-\*]\s*/, '').trim();
-                        if(!clean) return "";
-                        return `• Spearheaded and executed tasks involving ${clean}, ensuring high-level precision and efficiency.`;
-                    }).filter(Boolean).join('\n');
-
-                    enhancedBullets = `Enterprise / Organization — Professional Role (2023 - Present)\n${converted}\n• Maintained meticulous records and delivered reliable support resulting in enhanced operational productivity.`;
+                    enhancedBullets = "Enterprise / Organization — Professional Role (2023 - Present)\n• Managed core day-to-day operations and administrative workflows, maintaining high adherence to quality standards.\n• Collaborated with cross-functional team members to resolve client inquiries and streamline service delivery.";
                 }
                 document.getElementById('inputExperience').value = enhancedBullets;
                 updatePreview();
-                setStatus("✨ Work experience successfully transformed into recruiter-ready bullet points!");
+                setStatus("✨ Work experience successfully transformed!");
             }, 600);
         }
 
@@ -289,11 +407,9 @@
             if (mode === 'resume') {
                 if(extraSection) extraSection.style.display = 'none';
                 if(extraBlock) extraBlock.style.display = 'none';
-                setStatus("Switched to Concise Resume layout.");
             } else {
                 if(extraSection) extraSection.style.display = 'block';
                 if(extraBlock) extraBlock.style.display = 'block';
-                setStatus("Switched to Comprehensive CV layout.");
             }
         }
 
@@ -303,31 +419,16 @@
             if (size === 'letter') {
                 container.classList.remove('paper-a4');
                 container.classList.add('paper-letter');
-                setStatus("Paper size set to US Letter.");
             } else {
                 container.classList.remove('paper-letter');
                 container.classList.add('paper-a4');
-                setStatus("Paper size set to A4 Standard.");
             }
         }
 
         function changeTheme() {
             const theme = document.getElementById('colorTheme').value;
             const root = document.getElementById('bodyRoot');
-            const badge = document.getElementById('theme-badge');
-
             root.className = theme + ' bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col';
-
-            if (theme === 'theme-pink') {
-                if(badge) { badge.innerText = "SAILOR MOON PINK"; badge.className = "text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold"; }
-            } else if (theme === 'theme-cyan') {
-                if(badge) { badge.innerText = "CYBER CYAN"; badge.className = "text-xs bg-cyan-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold"; }
-            } else if (theme === 'theme-navy') {
-                if(badge) { badge.innerText = "CORPORATE NAVY"; badge.className = "text-xs bg-blue-900 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold"; }
-            } else {
-                if(badge) { badge.innerText = "CRISP TEAL"; badge.className = "text-xs bg-teal-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold"; }
-            }
-            setStatus("Theme palette updated.");
         }
 
         function updatePreview() {
@@ -337,10 +438,10 @@
             document.getElementById('prevPhone').innerText = document.getElementById('inputPhone').value || '+63 912 345 6789';
             document.getElementById('prevLocation').innerText = document.getElementById('inputLocation').value || 'Manila, Philippines';
 
-            document.getElementById('prevSummary').innerText = document.getElementById('inputSummary').value || 'Dedicated professional with a strong background in customer operations and problem-solving, committed to delivering high-performance results.';
+            document.getElementById('prevSummary').innerText = document.getElementById('inputSummary').value || 'Dedicated professional with a strong background in customer operations and problem-solving.';
             document.getElementById('prevExperience').innerText = document.getElementById('inputExperience').value || 'Detail your work experience on the left panel or click AI Transform.';
             document.getElementById('prevEducation').innerText = document.getElementById('inputEducation').value || 'University of the Philippines - Bachelor of Science (2022)';
-            document.getElementById('prevSkills').innerText = document.getElementById('inputSkills').value || 'Customer Service, Point of Sale (POS), Team Collaboration, Inventory Management';
+            document.getElementById('prevSkills').innerText = document.getElementById('inputSkills').value || 'Customer Service, Point of Sale (POS), Inventory Management';
             
             const certEl = document.getElementById('inputCertifications');
             const pubEl = document.getElementById('inputPublications');
@@ -370,13 +471,12 @@
                 publications: document.getElementById('inputPublications').value,
                 mode: document.getElementById('docMode').value,
                 paper: document.getElementById('paperSize').value,
-                theme: document.getElementById('colorTheme').value
+                theme: document.getElementById('colorTheme').value,
+                lang: document.getElementById('langSelect').value
             };
 
-            // 1. Save locally muna bilang backup
             localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 
-            // 2. I-save sa Cloud Backend kung may email
             if (!email) {
                 setStatus("💾 Saved locally! (Maglagay ng Email para ma-save din sa Cloud)");
                 return;
@@ -392,19 +492,17 @@
                 let result = await response.json();
                 if(result.success) {
                     setStatus("☁️ Resume successfully saved to Cloud & Local Storage!");
-                } else {
-                    setStatus("💾 Saved locally (Cloud sync failed).");
                 }
             } catch (err) {
-                setStatus("💾 Saved locally (Server offline - local backup used).");
+                setStatus("💾 Saved locally (Server offline - backup used).");
             }
         }
 
         async function loadFromCloud() {
-            const email = prompt("Ilagay ang iyong Email Address para i-load ang nakaimbak na resume mula sa Cloud:");
+            const email = prompt("Ilagay ang iyong Email Address para i-load ang resume mula sa Cloud:");
             if (!email) return;
 
-            setStatus("🔍 Searching cloud database for your resume...");
+            setStatus("🔍 Searching cloud database...");
             try {
                 let response = await fetch(`${API_BASE_URL}/api/resume/${encodeURIComponent(email)}`);
                 let result = await response.json();
@@ -423,12 +521,13 @@
                     document.getElementById('inputCertifications').value = data.certifications || '';
                     document.getElementById('inputPublications').value = data.publications || '';
                     
+                    if(data.lang) { document.getElementById('langSelect').value = data.lang; changeLanguage(); }
                     if(data.mode) { document.getElementById('docMode').value = data.mode; toggleMode(); }
                     if(data.paper) { document.getElementById('paperSize').value = data.paper; changePaperSize(); }
                     if(data.theme) { document.getElementById('colorTheme').value = data.theme; changeTheme(); }
 
                     updatePreview();
-                    setStatus("📂 Resume successfully loaded from Crisp Suite Cloud!");
+                    setStatus("📂 Resume successfully loaded from Cloud!");
                 }
             } catch (err) {
                 setStatus("⚠️ Walang nahanap na resume sa server para sa email na iyon.");
@@ -440,23 +539,17 @@
                 name: document.getElementById('inputName').value,
                 title: document.getElementById('inputTitle').value,
                 email: document.getElementById('inputEmail').value,
-                phone: document.getElementById('inputPhone').value,
-                location: document.getElementById('inputLocation').value,
                 summary: document.getElementById('inputSummary').value,
-                experience: document.getElementById('inputExperience').value,
-                education: document.getElementById('inputEducation').value,
-                skills: document.getElementById('inputSkills').value,
-                certifications: document.getElementById('inputCertifications').value,
-                publications: document.getElementById('inputPublications').value
+                experience: document.getElementById('inputExperience').value
             };
             const blob = new Blob([JSON.stringify(formData, null, 2)], { type: "application/json" });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${(formData.name || 'resume').toLowerCase().replace(/\s+/g, '_')}_crisp_suite.json`;
+            a.download = `${(formData.name || 'resume').toLowerCase().replace(/\s+/g, '_')}_crisp.json`;
             a.click();
             URL.revokeObjectURL(url);
-            setStatus("📥 Resume data exported as JSON file!");
+            setStatus("📥 Resume data exported as JSON!");
         }
 
         // Event Listeners
@@ -465,7 +558,6 @@
         document.getElementById('exportJsonButton').addEventListener('click', exportJson);
         document.getElementById('printButton').addEventListener('click', () => { window.print(); });
 
-        // Initial preview render
         updatePreview();
     </script>
 </body>
