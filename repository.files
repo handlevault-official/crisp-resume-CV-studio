@@ -1,0 +1,8 @@
+crisp-resume-CV-studio/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── .gitignore
+├── index.html
+├── manifest.json
+└── repo.js
