@@ -1,0 +1,85 @@
+        // Backend API base URL (Palitan ng iyong live Render/Railway URL kapag naka-deploy na)
+        const API_BASE_URL = "http://localhost:8000"; 
+
+        async function saveDraft() {
+            const email = document.getElementById('inputEmail').value.trim();
+            const name = document.getElementById('inputName').value.trim();
+
+            const formData = {
+                name: name,
+                title: document.getElementById('inputTitle').value,
+                email: email,
+                phone: document.getElementById('inputPhone').value,
+                location: document.getElementById('inputLocation').value,
+                summary: document.getElementById('inputSummary').value,
+                experience: document.getElementById('inputExperience').value,
+                education: document.getElementById('inputEducation').value,
+                skills: document.getElementById('inputSkills').value,
+                certifications: document.getElementById('inputCertifications').value,
+                publications: document.getElementById('inputPublications').value,
+                mode: document.getElementById('docMode').value,
+                paper: document.getElementById('paperSize').value,
+                theme: document.getElementById('colorTheme').value
+            };
+
+            // 1. Save locally muna bilang backup
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+
+            // 2. Subukang i-save sa Cloud Backend kung may email ang user
+            if (!email) {
+                setStatus("💾 Saved locally! (Maglagay ng Email para ma-save din sa Cloud)");
+                return;
+            }
+
+            setStatus("☁️ Saving resume to Crisp Suite Cloud...");
+            try {
+                let response = await fetch(`${API_BASE_URL}/api/resume/save`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, name: name || 'Unnamed', resume_data: formData })
+                });
+                let result = await response.json();
+                if(result.success) {
+                    setStatus("☁️ Resume successfully saved to Cloud & Local Storage!");
+                } else {
+                    setStatus("💾 Saved locally (Cloud sync failed).");
+                }
+            } catch (err) {
+                setStatus("💾 Saved locally (Server offline - local backup used).");
+            }
+        }
+
+        async function loadFromCloud() {
+            const email = prompt("Ilagay ang iyong Email Address para i-load ang nakaimbak na resume mula sa Cloud:");
+            if (!email) return;
+
+            setStatus("🔍 Searching cloud database for your resume...");
+            try {
+                let response = await fetch(`${API_BASE_URL}/api/resume/${encodeURIComponent(email)}`);
+                let result = await response.json();
+                
+                if(result.success && result.resume_data) {
+                    const data = result.resume_data;
+                    document.getElementById('inputName').value = data.name || '';
+                    document.getElementById('inputTitle').value = data.title || '';
+                    document.getElementById('inputEmail').value = data.email || '';
+                    document.getElementById('inputPhone').value = data.phone || '';
+                    document.getElementById('inputLocation').value = data.location || '';
+                    document.getElementById('inputSummary').value = data.summary || '';
+                    document.getElementById('inputExperience').value = data.experience || '';
+                    document.getElementById('inputEducation').value = data.education || '';
+                    document.getElementById('inputSkills').value = data.skills || '';
+                    document.getElementById('inputCertifications').value = data.certifications || '';
+                    document.getElementById('inputPublications').value = data.publications || '';
+                    
+                    if(data.mode) { document.getElementById('docMode').value = data.mode; toggleMode(); }
+                    if(data.paper) { document.getElementById('paperSize').value = data.paper; changePaperSize(); }
+                    if(data.theme) { document.getElementById('colorTheme').value = data.theme; changeTheme(); }
+
+                    updatePreview();
+                    setStatus("📂 Resume successfully loaded from Crisp Suite Cloud!");
+                }
+            } catch (err) {
+                setStatus("⚠️ Walang nahanap na resume sa server para sa email na iyon.");
+            }
+        }
