@@ -6,7 +6,7 @@
     <title>Professional Resume & CV Studio - Crisp Suite</title>
     <!-- Tailwind CSS for rapid, clean styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%232dd4bf%22/><text y=%22.9em%22 font-size=%2260%22 x=%2218%22>✨</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%2314b8a6%22/><text y=%22.9em%22 font-size=%2260%22 x=%2218%22>✨</text></svg>">
     <style>
         :root {
             --theme-primary: #14b8a6; /* Crisp Teal default */
@@ -40,18 +40,18 @@
         <div>
             <h1 class="text-xl font-bold tracking-wide flex items-center gap-2 flex-wrap">
                 📄 Crisp Suite Resume &amp; CV Studio
-                <span id="theme-badge" class="text-xs bg-teal-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">AI ENHANCER ACTIVE</span>
+                <span id="theme-badge" class="text-xs bg-teal-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">AI CLOUD READY</span>
             </h1>
-            <p class="text-xs text-slate-400 mt-0.5">Transform raw notes or Taglish drafts into professional ATS-optimized resumes instantly.</p>
+            <p class="text-xs text-slate-400 mt-0.5">Transform raw notes into ATS-optimized resumes and sync directly to your cloud backend.</p>
         </div>  
         
         <!-- Action Hub Buttons -->
         <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-end">
-            <button id="saveButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition">
-                💾 Save Draft
+            <button id="saveButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center gap-1">
+                💾 Save (Cloud/Local)
             </button>
-            <button id="loadButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition">
-                📂 Load File
+            <button id="loadCloudButton" type="button" class="bg-teal-900 hover:bg-teal-800 text-teal-200 border border-teal-700 px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center gap-1">
+                ☁️ Load from Cloud
             </button>
             <button id="exportJsonButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition">
                 📥 Export JSON
@@ -111,7 +111,7 @@
                 <input type="text" id="inputName" placeholder="Full Name (e.g. Juan Dela Cruz)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
                 <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Senior Customer Support Specialist)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
                 <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="inputEmail" placeholder="Email Address" oninput="updatePreview()" class="border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
+                    <input type="text" id="inputEmail" placeholder="Email Address (Cloud Key)" oninput="updatePreview()" class="border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
                     <input type="text" id="inputPhone" placeholder="Phone Number" oninput="updatePreview()" class="border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
                 </div>
                 <input type="text" id="inputLocation" placeholder="Location (e.g. Manila, Philippines)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
@@ -230,6 +230,8 @@
         "use strict";
 
         const STORAGE_KEY = "crisp_resume_studio_draft_v2";
+        // Palitan ang URL na ito ng iyong live Render/Railway backend URL kapag naka-deploy na
+        const API_BASE_URL = "http://localhost:8000"; 
         const statusEl = document.querySelector("#status");
         const fileInput = document.querySelector("#fileInput");
 
@@ -247,7 +249,6 @@
                 if (!raw) {
                     polished = "Results-driven professional with extensive hands-on experience in client relations, operational execution, and process optimization. Adept at collaborating in fast-paced environments to achieve high-accuracy results and exceptional stakeholder satisfaction.";
                 } else {
-                    // Smart conversion rules
                     polished = `Results-oriented professional with a strong foundation in ${raw}. Proven ability to execute daily operational tasks efficiently, manage client communications with high professionalism, and adapt quickly to dynamic work environments to drive positive organizational outcomes.`;
                 }
                 document.getElementById('inputSummary').value = polished;
@@ -265,12 +266,10 @@
                 if (!raw) {
                     enhancedBullets = "Company Name — Position Title (2023 - Present)\n• Managed core day-to-day operations and administrative workflows, maintaining 100% adherence to quality standards.\n• Collaborated with cross-functional team members to resolve customer inquiries and streamline service delivery.\n• Conducted regular quality audits and inventory tracking to minimize discrepancies and improve resource efficiency.";
                 } else {
-                    // Turn user rough notes into formal bullet points
                     const lines = raw.split('\n');
                     let converted = lines.map(line => {
                         let clean = line.replace(/^[•\-\*]\s*/, '').trim();
                         if(!clean) return "";
-                        // Auto-enhance action phrasing
                         return `• Spearheaded and executed tasks involving ${clean}, ensuring high-level precision and efficiency.`;
                     }).filter(Boolean).join('\n');
 
@@ -352,12 +351,15 @@
             if(prevPub && pubEl) prevPub.innerText = pubEl.value || 'E-Commerce Inventory Tracking System Prototype';
         }
 
-        // --- Storage & File Management ---
-        function saveDraft() {
+        // --- Cloud & Local Storage Save / Load ---
+        async function saveDraft() {
+            const email = document.getElementById('inputEmail').value.trim();
+            const name = document.getElementById('inputName').value.trim();
+
             const formData = {
-                name: document.getElementById('inputName').value,
+                name: name,
                 title: document.getElementById('inputTitle').value,
-                email: document.getElementById('inputEmail').value,
+                email: email,
                 phone: document.getElementById('inputPhone').value,
                 location: document.getElementById('inputLocation').value,
                 summary: document.getElementById('inputSummary').value,
@@ -370,38 +372,66 @@
                 paper: document.getElementById('paperSize').value,
                 theme: document.getElementById('colorTheme').value
             };
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-            setStatus("💾 Draft saved successfully to browser storage!");
-        }
 
-        function loadDraft() {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (!saved) {
-                setStatus("⚠️ No saved draft found.");
+            // 1. Save locally muna bilang backup
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+
+            // 2. I-save sa Cloud Backend kung may email
+            if (!email) {
+                setStatus("💾 Saved locally! (Maglagay ng Email para ma-save din sa Cloud)");
                 return;
             }
-            try {
-                const data = JSON.parse(saved);
-                document.getElementById('inputName').value = data.name || '';
-                document.getElementById('inputTitle').value = data.title || '';
-                document.getElementById('inputEmail').value = data.email || '';
-                document.getElementById('inputPhone').value = data.phone || '';
-                document.getElementById('inputLocation').value = data.location || '';
-                document.getElementById('inputSummary').value = data.summary || '';
-                document.getElementById('inputExperience').value = data.experience || '';
-                document.getElementById('inputEducation').value = data.education || '';
-                document.getElementById('inputSkills').value = data.skills || '';
-                document.getElementById('inputCertifications').value = data.certifications || '';
-                document.getElementById('inputPublications').value = data.publications || '';
-                
-                if(data.mode) { document.getElementById('docMode').value = data.mode; toggleMode(); }
-                if(data.paper) { document.getElementById('paperSize').value = data.paper; changePaperSize(); }
-                if(data.theme) { document.getElementById('colorTheme').value = data.theme; changeTheme(); }
 
-                updatePreview();
-                setStatus("📂 Draft loaded successfully!");
-            } catch(e) {
-                setStatus("❌ Error loading saved draft.");
+            setStatus("☁️ Saving resume to Crisp Suite Cloud...");
+            try {
+                let response = await fetch(`${API_BASE_URL}/api/resume/save`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, name: name || 'Unnamed', resume_data: formData })
+                });
+                let result = await response.json();
+                if(result.success) {
+                    setStatus("☁️ Resume successfully saved to Cloud & Local Storage!");
+                } else {
+                    setStatus("💾 Saved locally (Cloud sync failed).");
+                }
+            } catch (err) {
+                setStatus("💾 Saved locally (Server offline - local backup used).");
+            }
+        }
+
+        async function loadFromCloud() {
+            const email = prompt("Ilagay ang iyong Email Address para i-load ang nakaimbak na resume mula sa Cloud:");
+            if (!email) return;
+
+            setStatus("🔍 Searching cloud database for your resume...");
+            try {
+                let response = await fetch(`${API_BASE_URL}/api/resume/${encodeURIComponent(email)}`);
+                let result = await response.json();
+                
+                if(result.success && result.resume_data) {
+                    const data = result.resume_data;
+                    document.getElementById('inputName').value = data.name || '';
+                    document.getElementById('inputTitle').value = data.title || '';
+                    document.getElementById('inputEmail').value = data.email || '';
+                    document.getElementById('inputPhone').value = data.phone || '';
+                    document.getElementById('inputLocation').value = data.location || '';
+                    document.getElementById('inputSummary').value = data.summary || '';
+                    document.getElementById('inputExperience').value = data.experience || '';
+                    document.getElementById('inputEducation').value = data.education || '';
+                    document.getElementById('inputSkills').value = data.skills || '';
+                    document.getElementById('inputCertifications').value = data.certifications || '';
+                    document.getElementById('inputPublications').value = data.publications || '';
+                    
+                    if(data.mode) { document.getElementById('docMode').value = data.mode; toggleMode(); }
+                    if(data.paper) { document.getElementById('paperSize').value = data.paper; changePaperSize(); }
+                    if(data.theme) { document.getElementById('colorTheme').value = data.theme; changeTheme(); }
+
+                    updatePreview();
+                    setStatus("📂 Resume successfully loaded from Crisp Suite Cloud!");
+                }
+            } catch (err) {
+                setStatus("⚠️ Walang nahanap na resume sa server para sa email na iyon.");
             }
         }
 
@@ -431,40 +461,9 @@
 
         // Event Listeners
         document.getElementById('saveButton').addEventListener('click', saveDraft);
-        document.getElementById('loadButton').addEventListener('click', loadDraft);
+        document.getElementById('loadCloudButton').addEventListener('click', loadFromCloud);
         document.getElementById('exportJsonButton').addEventListener('click', exportJson);
         document.getElementById('printButton').addEventListener('click', () => { window.print(); });
-
-        document.getElementById('loadButton').addEventListener('dblclick', () => {
-            fileInput.click();
-        });
-
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                try {
-                    const data = JSON.parse(evt.target.result);
-                    document.getElementById('inputName').value = data.name || '';
-                    document.getElementById('inputTitle').value = data.title || '';
-                    document.getElementById('inputEmail').value = data.email || '';
-                    document.getElementById('inputPhone').value = data.phone || '';
-                    document.getElementById('inputLocation').value = data.location || '';
-                    document.getElementById('inputSummary').value = data.summary || '';
-                    document.getElementById('inputExperience').value = data.experience || '';
-                    document.getElementById('inputEducation').value = data.education || '';
-                    document.getElementById('inputSkills').value = data.skills || '';
-                    document.getElementById('inputCertifications').value = data.certifications || '';
-                    document.getElementById('inputPublications').value = data.publications || '';
-                    updatePreview();
-                    setStatus("📂 Resume imported successfully from JSON file!");
-                } catch (err) {
-                    setStatus("❌ Invalid JSON file format.");
-                }
-            };
-            reader.readAsText(file);
-        });
 
         // Initial preview render
         updatePreview();
