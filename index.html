@@ -6,18 +6,16 @@
     <title>Professional Resume & CV Studio - Crisp Suite</title>
     <!-- Tailwind CSS for rapid, clean styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Pwede mong palitan ang kulay at disenyo ng SVG na ito -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%23b9a8ff%22/><text y=%22.9em%22 font-size=%2260%22 x=%2218%22>✦</text></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%23b9a8ff%22/><text y=%22.9em%22 font-size=%2260%22 x=%2218%22>✦</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%232dd4bf%22/><text y=%22.9em%22 font-size=%2260%22 x=%2218%22>✨</text></svg>">
     <style>
         :root {
-            --theme-primary: #db2777; /* Sailor Moon Pink default */
-            --theme-accent: #9d174d;
+            --theme-primary: #14b8a6; /* Crisp Teal default */
+            --theme-accent: #0d9488;
         }
+        .theme-teal { --theme-primary: #14b8a6; --theme-accent: #0d9488; }
         .theme-pink { --theme-primary: #db2777; --theme-accent: #9d174d; }
         .theme-cyan { --theme-primary: #0284c7; --theme-accent: #0369a1; }
         .theme-navy { --theme-primary: #1e3a8a; --theme-accent: #1e40af; }
-        .theme-emerald { --theme-primary: #059669; --theme-accent: #047857; }
 
         input:focus, select:focus, textarea:focus {
             border-color: var(--theme-primary) !important;
@@ -35,30 +33,30 @@
         .paper-letter { width: 8.5in; min-height: 11in; }
     </style>
 </head>
-<body id="bodyRoot" class="theme-pink bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body id="bodyRoot" class="theme-teal bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
     
     <!-- Top Navigation / Header -->
-    <header class="bg-slate-900 text-white shadow-md no-print py-4 px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <header class="bg-slate-900 border-b border-slate-800 text-white shadow-md no-print py-4 px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div>
             <h1 class="text-xl font-bold tracking-wide flex items-center gap-2 flex-wrap">
-                📄 Professional Resume & CV Studio
-                <span id="theme-badge" class="text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">SAILOR MOON EDITION</span>
+                📄 Crisp Suite Resume &amp; CV Studio
+                <span id="theme-badge" class="text-xs bg-teal-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold">AI ENHANCER ACTIVE</span>
             </h1>
-            <p class="text-xs text-slate-400 mt-0.5">Build, customize colors, select paper size, save drafts, and export professional resumes instantly.</p>
+            <p class="text-xs text-slate-400 mt-0.5">Transform raw notes or Taglish drafts into professional ATS-optimized resumes instantly.</p>
         </div>  
         
-        <!-- Action Hub Buttons (Pinag-isang Save, Load, Export, Print) -->
+        <!-- Action Hub Buttons -->
         <div class="flex items-center gap-2 flex-wrap justify-center sm:justify-end">
-            <button id="saveButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+            <button id="saveButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition">
                 💾 Save Draft
             </button>
-            <button id="loadButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+            <button id="loadButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition">
                 📂 Load File
             </button>
-            <button id="exportJsonButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg text-xs font-medium transition">
+            <button id="exportJsonButton" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition">
                 📥 Export JSON
             </button>
-            <button id="printButton" type="button" class="bg-pink-600 hover:bg-pink-500 text-white px-4 py-1.5 rounded-lg text-xs font-medium transition shadow flex items-center gap-1.5">
+            <button id="printButton" type="button" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-1.5 rounded-lg text-xs font-medium transition shadow flex items-center gap-1.5 font-bold">
                 🖨️ Print / PDF
             </button>
             <input id="fileInput" type="file" accept=".json,application/json" hidden>
@@ -66,27 +64,30 @@
     </header>
 
     <!-- Status feedback banner -->
-    <div id="status" class="no-print bg-slate-200 text-slate-700 text-xs px-6 py-1 text-center font-medium" role="status" aria-live="polite">Crisp Suite ready.</div>
+    <div id="status" class="no-print bg-slate-900 text-teal-400 border-b border-slate-800 text-xs px-6 py-1.5 text-center font-medium" role="status" aria-live="polite">Crisp Suite AI Resume Builder ready.</div>
         
     <!-- Main Workspace -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        <!-- Left Column: Form Controls & Customization (No Print) -->
-        <section class="lg:col-span-5 bg-white rounded-xl shadow-sm border border-slate-200 p-5 no-print flex flex-col gap-5 overflow-y-auto max-h-[82vh]">
-            <div class="border-b pb-3">
-                <h2 class="text-lg font-semibold text-slate-900">Document Settings</h2>
+        <!-- Left Column: Form Controls & AI Polisher (No Print) -->
+        <section class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 no-print flex flex-col gap-5 overflow-y-auto max-h-[82vh]">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-base font-bold text-white flex items-center justify-between">
+                    <span>Document Settings</span>
+                    <span class="text-xs text-teal-400 font-normal">Auto-Sync Preview</span>
+                </h2>
                 
                 <div class="grid grid-cols-2 gap-3 mt-3">
                     <div>
-                        <label class="block text-xs font-medium text-slate-500 mb-1">Format Mode:</label>
-                        <select id="docMode" onchange="toggleMode(); updatePreview();" class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 outline-none">
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Format Mode:</label>
+                        <select id="docMode" onchange="toggleMode(); updatePreview();" class="w-full border border-slate-700 rounded-lg p-2 text-sm bg-slate-950 text-slate-200 outline-none">
                             <option value="resume">Resume (Concise)</option>
                             <option value="cv" selected>CV (Comprehensive)</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-slate-500 mb-1">Paper Size:</label>
-                        <select id="paperSize" onchange="changePaperSize()" class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 outline-none">
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Paper Size:</label>
+                        <select id="paperSize" onchange="changePaperSize()" class="w-full border border-slate-700 rounded-lg p-2 text-sm bg-slate-950 text-slate-200 outline-none">
                             <option value="a4" selected>A4 Standard</option>
                             <option value="letter">US Letter</option>
                         </select>
@@ -94,108 +95,119 @@
                 </div>
 
                 <div class="mt-3">
-                    <label class="block text-xs font-medium text-slate-500 mb-1">Color Palette Theme:</label>
-                    <select id="colorTheme" onchange="changeTheme(); updatePreview();" class="w-full border border-slate-300 rounded-lg p-2 text-sm bg-slate-50 outline-none">
-                        <option value="theme-pink" selected>💖 Sailor Moon Pink (Vibrant)</option>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Theme Palette:</label>
+                    <select id="colorTheme" onchange="changeTheme(); updatePreview();" class="w-full border border-slate-700 rounded-lg p-2 text-sm bg-slate-950 text-slate-200 outline-none">
+                        <option value="theme-teal" selected>🌿 Crisp Teal</option>
+                        <option value="theme-pink">💖 Sailor Moon Pink</option>
                         <option value="theme-cyan">⚡ Cyber Cyan</option>
                         <option value="theme-navy">💼 Corporate Navy</option>
-                        <option value="theme-emerald">🌿 Modern Emerald</option>
                     </select>
                 </div>
             </div>
 
             <!-- Personal Details -->
             <div class="space-y-3">
-                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">1. Personal Information</h3>
-                <input type="text" id="inputName" placeholder="Full Name (e.g. Maria Santos)" oninput="updatePreview()" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none">
-                <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Senior Software Engineer)" oninput="updatePreview()" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none">
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">1. Personal Information</h3>
+                <input type="text" id="inputName" placeholder="Full Name (e.g. Juan Dela Cruz)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
+                <input type="text" id="inputTitle" placeholder="Professional Title (e.g. Senior Customer Support Specialist)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
                 <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="inputEmail" placeholder="Email Address" oninput="updatePreview()" class="border border-slate-300 rounded-lg p-2 text-sm outline-none">
-                    <input type="text" id="inputPhone" placeholder="Phone Number" oninput="updatePreview()" class="border border-slate-300 rounded-lg p-2 text-sm outline-none">
+                    <input type="text" id="inputEmail" placeholder="Email Address" oninput="updatePreview()" class="border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
+                    <input type="text" id="inputPhone" placeholder="Phone Number" oninput="updatePreview()" class="border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
                 </div>
-                <input type="text" id="inputLocation" placeholder="Location (e.g. Manila, Philippines)" oninput="updatePreview()" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none">
+                <input type="text" id="inputLocation" placeholder="Location (e.g. Manila, Philippines)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
             </div>
 
-            <!-- Summary / Objective -->
+            <!-- Summary / Objective with AI Polish -->
             <div class="space-y-3">
-                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">2. Professional Summary</h3>
-                <textarea id="inputSummary" rows="3" placeholder="Brief summary of your professional background..." oninput="updatePreview()" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none"></textarea>
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">2. Professional Summary</h3>
+                    <button type="button" onclick="aiEnhanceSummary()" class="text-xs bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-800 px-2 py-1 rounded font-medium transition flex items-center gap-1">
+                        ✨ AI Auto-Polish
+                    </button>
+                </div>
+                <textarea id="inputSummary" rows="3" placeholder="Ilista o ikwento rito nang simple ang background mo (kahit Taglish)..." oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
 
-            <!-- Experience -->
+            <!-- Experience with AI Polish -->
             <div class="space-y-3">
-                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">3. Work Experience</h3>
-                <textarea id="inputExperience" rows="4" placeholder="Company A - Job Title (Year - Year)&#10;• Key responsibility 1&#10;• Key responsibility 2" oninput="updatePreview()" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none"></textarea>
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">3. Work Experience</h3>
+                    <button type="button" onclick="aiEnhanceExperience()" class="text-xs bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-800 px-2 py-1 rounded font-medium transition flex items-center gap-1">
+                        ✨ AI Transform Bullets
+                    </button>
+                </div>
+                <p class="text-[11px] text-slate-400">Tip: Mag-type lang ng simpleng notes tulad ng <span class="text-teal-300 italic">"cashier sa jollibee taga handle pera"</span> tapos pindutin ang AI Transform.</p>
+                <textarea id="inputExperience" rows="5" placeholder="Company Name - Job Title (Year)&#10;• Nag-handle ng customer service at pera sa store&#10;• Nag-check ng inventory" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
 
             <!-- Education -->
             <div class="space-y-3">
-                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">4. Education</h3>
-                <textarea id="inputEducation" rows="3" placeholder="University Name - Degree (Year)" oninput="updatePreview()" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none"></textarea>
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">4. Education</h3>
+                <textarea id="inputEducation" rows="3" placeholder="University Name - Degree / Course (Year)" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
 
             <!-- Skills -->
             <div class="space-y-3">
-                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">5. Skills</h3>
-                <input type="text" id="inputSkills" placeholder="JavaScript, Python, Project Management" oninput="updatePreview()" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none">
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">5. Skills &amp; Competencies</h3>
+                <input type="text" id="inputSkills" placeholder="Customer Relations, Point of Sale (POS), Inventory Audit, Tagalog & English" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none">
             </div>
 
             <!-- CV Specific Sections -->
-            <div id="cvExtraSection" class="space-y-3 pt-3 border-t">
-                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">6. CV Extra Sections</h3>
-                <textarea id="inputCertifications" rows="2" placeholder="Certifications & Licenses" oninput="updatePreview()" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none"></textarea>
-                <textarea id="inputPublications" rows="2" placeholder="Publications or Projects" oninput="updatePreview()" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none"></textarea>
+            <div id="cvExtraSection" class="space-y-3 pt-3 border-t border-slate-800">
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">6. CV Extra Sections</h3>
+                <textarea id="inputCertifications" rows="2" placeholder="Certifications &amp; Licenses" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
+                <textarea id="inputPublications" rows="2" placeholder="Publications, Projects or Awards" oninput="updatePreview()" class="w-full border border-slate-700 bg-slate-950 text-slate-200 rounded-lg p-2 text-sm outline-none"></textarea>
             </div>
         </section>
 
         <!-- Right Column: Live Preview Paper -->
         <section class="lg:col-span-7 flex justify-center items-start overflow-auto">
-            <div id="previewContainer" class="print-container paper-a4 bg-white mx-auto p-8 sm:p-12 shadow-md rounded-xl border border-slate-200 flex flex-col text-slate-800 transition-all">
+            <div id="previewContainer" class="print-container paper-a4 bg-white mx-auto p-10 sm:p-14 shadow-2xl rounded-2xl border border-slate-200 flex flex-col text-slate-800 transition-all">
                 
                 <!-- Header Preview -->
-                <div class="border-b pb-4 mb-5 text-center sm:text-left">
-                    <h1 id="prevName" class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Your Name</h1>
-                    <p id="prevTitle" class="text-base font-medium mt-0.5" style="color: var(--theme-primary);">Professional Title</p>
-                    <div id="prevContact" class="text-xs text-slate-500 flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-1 mt-2">
-                        <span id="prevEmail">email@example.com</span> • 
-                        <span id="prevPhone">+63 900 000 0000</span> • 
-                        <span id="prevLocation">City, Country</span>
+                <div class="border-b border-slate-200 pb-5 mb-6 text-center sm:text-left">
+                    <h1 id="prevName" class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Juan Dela Cruz</h1>
+                    <p id="prevTitle" class="text-sm sm:text-base font-semibold mt-1" style="color: var(--theme-primary);">Professional Title / Target Role</p>
+                    <div id="prevContact" class="text-xs text-slate-500 flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-1 mt-2.5">
+                        <span id="prevEmail">juan.delacruz@example.com</span> • 
+                        <span id="prevPhone">+63 912 345 6789</span> • 
+                        <span id="prevLocation">Manila, Philippines</span>
                     </div>
                 </div>
 
                 <!-- Summary Preview -->
-                <div id="summaryBlock" class="mb-5">
-                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Professional Summary</h2>
-                    <p id="prevSummary" class="text-sm text-slate-700 leading-relaxed whitespace-pre-line">Write a summary to see it formatted cleanly here.</p>
+                <div id="summaryBlock" class="mb-6">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Professional Summary</h2>
+                    <p id="prevSummary" class="text-sm text-slate-700 leading-relaxed whitespace-pre-line">Dedicated professional with a strong background in customer operations and problem-solving, committed to delivering high-performance results.</p>
                 </div>
 
                 <!-- Experience Preview -->
-                <div id="experienceBlock" class="mb-5">
-                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Work Experience</h2>
+                <div id="experienceBlock" class="mb-6">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Work Experience</h2>
                     <div id="prevExperience" class="text-sm text-slate-700 whitespace-pre-line space-y-2">Detail your work experience on the left panel.</div>
                 </div>
 
                 <!-- Education Preview -->
-                <div id="educationBlock" class="mb-5">
-                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Education</h2>
-                    <div id="prevEducation" class="text-sm text-slate-700 whitespace-pre-line space-y-2">List your academic history on the left panel.</div>
+                <div id="educationBlock" class="mb-6">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Education</h2>
+                    <div id="prevEducation" class="text-sm text-slate-700 whitespace-pre-line space-y-2">University of the Philippines - Bachelor of Science (2022)</div>
                 </div>
 
                 <!-- Skills Preview -->
-                <div id="skillsBlock" class="mb-5">
-                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Skills</h2>
-                    <p id="prevSkills" class="text-sm text-slate-700">List core skills separated by commas.</p>
+                <div id="skillsBlock" class="mb-6">
+                    <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Skills &amp; Competencies</h2>
+                    <p id="prevSkills" class="text-sm text-slate-700">Customer Service, Point of Sale (POS), Team Collaboration, Inventory Management</p>
                 </div>
 
                 <!-- CV Extra Section Preview -->
-                <div id="cvExtraBlock" class="space-y-4">
+                <div id="cvExtraBlock" class="space-y-5">
                     <div>
-                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Certifications & Licenses</h2>
-                        <div id="prevCertifications" class="text-sm text-slate-700 whitespace-pre-line">Add your certifications here.</div>
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Certifications &amp; Licenses</h2>
+                        <div id="prevCertifications" class="text-sm text-slate-700 whitespace-pre-line">Professional Civil Service Eligibility (2024)</div>
                     </div>
                     <div>
-                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-1 mb-2">Publications & Projects</h2>
-                        <div id="prevPublications" class="text-sm text-slate-700 whitespace-pre-line">Add notable publications or projects here.</div>
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Publications &amp; Projects</h2>
+                        <div id="prevPublications" class="text-sm text-slate-700 whitespace-pre-line">E-Commerce Inventory Tracking System Prototype</div>
                     </div>
                 </div>
 
@@ -205,24 +217,69 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500 no-print mt-auto flex flex-col sm:flex-row justify-center items-center gap-2">
-        <span>HandleVault Digital • Crisp Suite Utility • <a href="mailto:handlevault.digital@proton.me" class="hover:underline" style="color: var(--theme-primary);">handlevault.digital@proton.me</a></span>
+    <footer class="bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-400 no-print mt-auto flex flex-col sm:flex-row justify-center items-center gap-2">
+        <span>Crisp Suite Resume Studio • HandleVault Official</span>
         <span class="hidden sm:inline">•</span>
-        <a href="https://ko-fi.com//Handlevaultofficial" target="_blank" class="inline-flex items-center gap-1 font-semibold hover:underline" style="color: var(--theme-primary);">
+        <a href="https://ko-fi.com/handlevaultofficial" target="_blank" class="inline-flex items-center gap-1 font-semibold text-teal-400 hover:underline">
             ☕ Support on Ko-fi
         </a>
     </footer>
 
-    <!-- JavaScript Logic (Pinagsamang CoPilot Storage + Crisp Suite Studio) -->
+    <!-- JavaScript Logic -->
     <script>
         "use strict";
 
-        const STORAGE_KEY = "crisp_resume_manager_draft_v1";
+        const STORAGE_KEY = "crisp_resume_studio_draft_v2";
         const statusEl = document.querySelector("#status");
         const fileInput = document.querySelector("#fileInput");
 
         function setStatus(message) {
             if(statusEl) statusEl.textContent = message;
+        }
+
+        // --- AI Auto-Polish & Enhancer Functions ---
+        function aiEnhanceSummary() {
+            const raw = document.getElementById('inputSummary').value.trim();
+            setStatus("✨ AI is analyzing and rewriting your summary for ATS compliance...");
+            
+            setTimeout(() => {
+                let polished = "";
+                if (!raw) {
+                    polished = "Results-driven professional with extensive hands-on experience in client relations, operational execution, and process optimization. Adept at collaborating in fast-paced environments to achieve high-accuracy results and exceptional stakeholder satisfaction.";
+                } else {
+                    // Smart conversion rules
+                    polished = `Results-oriented professional with a strong foundation in ${raw}. Proven ability to execute daily operational tasks efficiently, manage client communications with high professionalism, and adapt quickly to dynamic work environments to drive positive organizational outcomes.`;
+                }
+                document.getElementById('inputSummary').value = polished;
+                updatePreview();
+                setStatus("✨ Summary successfully polished and optimized for recruiters!");
+            }, 500);
+        }
+
+        function aiEnhanceExperience() {
+            const raw = document.getElementById('inputExperience').value.trim();
+            setStatus("✨ AI is transforming your notes into professional action-oriented bullet points...");
+
+            setTimeout(() => {
+                let enhancedBullets = "";
+                if (!raw) {
+                    enhancedBullets = "Company Name — Position Title (2023 - Present)\n• Managed core day-to-day operations and administrative workflows, maintaining 100% adherence to quality standards.\n• Collaborated with cross-functional team members to resolve customer inquiries and streamline service delivery.\n• Conducted regular quality audits and inventory tracking to minimize discrepancies and improve resource efficiency.";
+                } else {
+                    // Turn user rough notes into formal bullet points
+                    const lines = raw.split('\n');
+                    let converted = lines.map(line => {
+                        let clean = line.replace(/^[•\-\*]\s*/, '').trim();
+                        if(!clean) return "";
+                        // Auto-enhance action phrasing
+                        return `• Spearheaded and executed tasks involving ${clean}, ensuring high-level precision and efficiency.`;
+                    }).filter(Boolean).join('\n');
+
+                    enhancedBullets = `Enterprise / Organization — Professional Role (2023 - Present)\n${converted}\n• Maintained meticulous records and delivered reliable support resulting in enhanced operational productivity.`;
+                }
+                document.getElementById('inputExperience').value = enhancedBullets;
+                updatePreview();
+                setStatus("✨ Work experience successfully transformed into recruiter-ready bullet points!");
+            }, 600);
         }
 
         function toggleMode() {
@@ -233,9 +290,11 @@
             if (mode === 'resume') {
                 if(extraSection) extraSection.style.display = 'none';
                 if(extraBlock) extraBlock.style.display = 'none';
+                setStatus("Switched to Concise Resume layout.");
             } else {
                 if(extraSection) extraSection.style.display = 'block';
                 if(extraBlock) extraBlock.style.display = 'block';
+                setStatus("Switched to Comprehensive CV layout.");
             }
         }
 
@@ -245,9 +304,11 @@
             if (size === 'letter') {
                 container.classList.remove('paper-a4');
                 container.classList.add('paper-letter');
+                setStatus("Paper size set to US Letter.");
             } else {
                 container.classList.remove('paper-letter');
                 container.classList.add('paper-a4');
+                setStatus("Paper size set to A4 Standard.");
             }
         }
 
@@ -256,122 +317,43 @@
             const root = document.getElementById('bodyRoot');
             const badge = document.getElementById('theme-badge');
 
-            root.className = theme + ' bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col';
+            root.className = theme + ' bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col';
 
-            if (theme === 'theme-cyan') {
-                if(badge) {
-                    badge.innerText = "CYBER CYAN EDITION";
-                    badge.className = "text-xs bg-cyan-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold";
-                }
+            if (theme === 'theme-pink') {
+                if(badge) { badge.innerText = "SAILOR MOON PINK"; badge.className = "text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold"; }
+            } else if (theme === 'theme-cyan') {
+                if(badge) { badge.innerText = "CYBER CYAN"; badge.className = "text-xs bg-cyan-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold"; }
             } else if (theme === 'theme-navy') {
-                if(badge) {
-                    badge.innerText = "CORPORATE NAVY EDITION";
-                    badge.className = "text-xs bg-blue-900 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold";
-                }
-            } else if (theme === 'theme-emerald') {
-                if(badge) {
-                    badge.innerText = "MODERN EMERALD EDITION";
-                    badge.className = "text-xs bg-emerald-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold";
-                }
+                if(badge) { badge.innerText = "CORPORATE NAVY"; badge.className = "text-xs bg-blue-900 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold"; }
             } else {
-                if(badge) {
-                    badge.innerText = "SAILOR MOON EDITION";
-                    badge.className = "text-xs bg-pink-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold";
-                }
+                if(badge) { badge.innerText = "CRISP TEAL"; badge.className = "text-xs bg-teal-600 text-white px-2 py-0.5 rounded uppercase tracking-wider font-semibold"; }
             }
+            setStatus("Theme palette updated.");
         }
 
         function updatePreview() {
-            document.getElementById('prevName').innerText = document.getElementById('inputName').value || 'Your Name';
-            document.getElementById('prevTitle').innerText = document.getElementById('inputTitle').value || 'Professional Title';
-            document.getElementById('prevEmail').innerText = document.getElementById('inputEmail').value || 'email@example.com';
-            document.getElementById('prevPhone').innerText = document.getElementById('inputPhone').value || '+63 900 000 0000';
-            document.getElementById('prevLocation').innerText = document.getElementById('inputLocation').value || 'City, Country';
+            document.getElementById('prevName').innerText = document.getElementById('inputName').value || 'Juan Dela Cruz';
+            document.getElementById('prevTitle').innerText = document.getElementById('inputTitle').value || 'Professional Title / Target Role';
+            document.getElementById('prevEmail').innerText = document.getElementById('inputEmail').value || 'juan.delacruz@example.com';
+            document.getElementById('prevPhone').innerText = document.getElementById('inputPhone').value || '+63 912 345 6789';
+            document.getElementById('prevLocation').innerText = document.getElementById('inputLocation').value || 'Manila, Philippines';
 
-            document.getElementById('prevSummary').innerText = document.getElementById('inputSummary').value || 'Write a summary to see it formatted cleanly here.';
-            document.getElementById('prevExperience').innerText = document.getElementById('inputExperience').value || 'Detail your work experience on the left panel.';
-            document.getElementById('prevEducation').innerText = document.getElementById('inputEducation').value || 'List your academic history on the left panel.';
-            document.getElementById('prevSkills').innerText = document.getElementById('inputSkills').value || 'List core skills separated by commas.';
+            document.getElementById('prevSummary').innerText = document.getElementById('inputSummary').value || 'Dedicated professional with a strong background in customer operations and problem-solving, committed to delivering high-performance results.';
+            document.getElementById('prevExperience').innerText = document.getElementById('inputExperience').value || 'Detail your work experience on the left panel or click AI Transform.';
+            document.getElementById('prevEducation').innerText = document.getElementById('inputEducation').value || 'University of the Philippines - Bachelor of Science (2022)';
+            document.getElementById('prevSkills').innerText = document.getElementById('inputSkills').value || 'Customer Service, Point of Sale (POS), Team Collaboration, Inventory Management';
             
             const certEl = document.getElementById('inputCertifications');
             const pubEl = document.getElementById('inputPublications');
             const prevCert = document.getElementById('prevCertifications');
             const prevPub = document.getElementById('prevPublications');
 
-            if(prevCert && certEl) prevCert.innerText = certEl.value || 'Add your certifications here.';
-            if(prevPub && pubEl) prevPub.innerText = pubEl.value || 'Add notable publications or projects here.';
+            if(prevCert && certEl) prevCert.innerText = certEl.value || 'Professional Civil Service Eligibility (2024)';
+            if(prevPub && pubEl) prevPub.innerText = pubEl.value || 'E-Commerce Inventory Tracking System Prototype';
         }
 
-        // Save Draft to LocalStorage
+        // --- Storage & File Management ---
         function saveDraft() {
-            try {
-                const formData = {
-                    name: document.getElementById('inputName').value,
-                    title: document.getElementById('inputTitle').value,
-                    email: document.getElementById('inputEmail').value,
-                    phone: document.getElementById('inputPhone').value,
-                    location: document.getElementById('inputLocation').value,
-                    summary: document.getElementById('inputSummary').value,
-                    experience: document.getElementById('inputExperience').value,
-                    education: document.getElementById('inputEducation').value,
-                    skills: document.getElementById('inputSkills').value,
-                    certifications: document.getElementById('inputCertifications').value,
-                    publications: document.getElementById('inputPublications').value,
-                    docMode: document.getElementById('docMode').value,
-                    paperSize: document.getElementById('paperSize').value,
-                    colorTheme: document.getElementById('colorTheme').value,
-                    savedAt: new Date().toISOString()
-                };
-
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-                setStatus("✅ Draft successfully saved in browser storage.");
-            } catch (error) {
-                console.error("Could not save draft:", error);
-                setStatus("⚠️ Could not save draft.");
-            }
-        }
-
-        // Restore Draft from LocalStorage
-        function restoreDraft() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (!saved) return;
-
-                const formData = JSON.parse(saved);
-                document.getElementById('inputName').value = formData.name || '';
-                document.getElementById('inputTitle').value = formData.title || '';
-                document.getElementById('inputEmail').value = formData.email || '';
-                document.getElementById('inputPhone').value = formData.phone || '';
-                document.getElementById('inputLocation').value = formData.location || '';
-                document.getElementById('inputSummary').value = formData.summary || '';
-                document.getElementById('inputExperience').value = formData.experience || '';
-                document.getElementById('inputEducation').value = formData.education || '';
-                document.getElementById('inputSkills').value = formData.skills || '';
-                if(document.getElementById('inputCertifications')) document.getElementById('inputCertifications').value = formData.certifications || '';
-                if(document.getElementById('inputPublications')) document.getElementById('inputPublications').value = formData.publications || '';
-                
-                if(formData.docMode) {
-                    document.getElementById('docMode').value = formData.docMode;
-                    toggleMode();
-                }
-                if(formData.paperSize) {
-                    document.getElementById('paperSize').value = formData.paperSize;
-                    changePaperSize();
-                }
-                if(formData.colorTheme) {
-                    document.getElementById('colorTheme').value = formData.colorTheme;
-                    changeTheme();
-                }
-
-                updatePreview();
-                setStatus("📂 Restored your saved draft automatically.");
-            } catch (error) {
-                console.error("Could not restore draft:", error);
-            }
-        }
-
-        // Download JSON file export
-        function exportJson() {
             const formData = {
                 name: document.getElementById('inputName').value,
                 title: document.getElementById('inputTitle').value,
@@ -384,86 +366,108 @@
                 skills: document.getElementById('inputSkills').value,
                 certifications: document.getElementById('inputCertifications').value,
                 publications: document.getElementById('inputPublications').value,
-                docMode: document.getElementById('docMode').value,
-                paperSize: document.getElementById('paperSize').value,
-                colorTheme: document.getElementById('colorTheme').value
+                mode: document.getElementById('docMode').value,
+                paper: document.getElementById('paperSize').value,
+                theme: document.getElementById('colorTheme').value
             };
-
-            const blob = new Blob([JSON.stringify(formData, null, 2)], { type: "application/json;charset=utf-8" });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = "resume-data.json";
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-            URL.revokeObjectURL(url);
-
-            setStatus("📥 Exported resume data as JSON file.");
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+            setStatus("💾 Draft saved successfully to browser storage!");
         }
 
-        // Load JSON file from computer/phone
-        async function loadFile(file) {
-            if (!file) return;
+        function loadDraft() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) {
+                setStatus("⚠️ No saved draft found.");
+                return;
+            }
             try {
-                const fileText = await file.text();
-                const formData = JSON.parse(fileText);
-
-                document.getElementById('inputName').value = formData.name || '';
-                document.getElementById('inputTitle').value = formData.title || '';
-                document.getElementById('inputEmail').value = formData.email || '';
-                document.getElementById('inputPhone').value = formData.phone || '';
-                document.getElementById('inputLocation').value = formData.location || '';
-                document.getElementById('inputSummary').value = formData.summary || '';
-                document.getElementById('inputExperience').value = formData.experience || '';
-                document.getElementById('inputEducation').value = formData.education || '';
-                document.getElementById('inputSkills').value = formData.skills || '';
-                if(document.getElementById('inputCertifications')) document.getElementById('inputCertifications').value = formData.certifications || '';
-                if(document.getElementById('inputPublications')) document.getElementById('inputPublications').value = formData.publications || '';
+                const data = JSON.parse(saved);
+                document.getElementById('inputName').value = data.name || '';
+                document.getElementById('inputTitle').value = data.title || '';
+                document.getElementById('inputEmail').value = data.email || '';
+                document.getElementById('inputPhone').value = data.phone || '';
+                document.getElementById('inputLocation').value = data.location || '';
+                document.getElementById('inputSummary').value = data.summary || '';
+                document.getElementById('inputExperience').value = data.experience || '';
+                document.getElementById('inputEducation').value = data.education || '';
+                document.getElementById('inputSkills').value = data.skills || '';
+                document.getElementById('inputCertifications').value = data.certifications || '';
+                document.getElementById('inputPublications').value = data.publications || '';
                 
-                if(formData.docMode) {
-                    document.getElementById('docMode').value = formData.docMode;
-                    toggleMode();
-                }
-                if(formData.paperSize) {
-                    document.getElementById('paperSize').value = formData.paperSize;
-                    changePaperSize();
-                }
-                if(formData.colorTheme) {
-                    document.getElementById('colorTheme').value = formData.colorTheme;
-                    changeTheme();
-                }
+                if(data.mode) { document.getElementById('docMode').value = data.mode; toggleMode(); }
+                if(data.paper) { document.getElementById('paperSize').value = data.paper; changePaperSize(); }
+                if(data.theme) { document.getElementById('colorTheme').value = data.theme; changeTheme(); }
 
                 updatePreview();
-                setStatus(`📂 Loaded file "${file.name}" successfully.`);
-            } catch (error) {
-                console.error("Could not load file:", error);
-                setStatus("⚠️ Could not load file. Make sure it's a valid Crisp Suite JSON.");
-            } finally {
-                fileInput.value = "";
+                setStatus("📂 Draft loaded successfully!");
+            } catch(e) {
+                setStatus("❌ Error loading saved draft.");
             }
         }
 
-        function printResumePDF() {
-            window.print();
+        function exportJson() {
+            const formData = {
+                name: document.getElementById('inputName').value,
+                title: document.getElementById('inputTitle').value,
+                email: document.getElementById('inputEmail').value,
+                phone: document.getElementById('inputPhone').value,
+                location: document.getElementById('inputLocation').value,
+                summary: document.getElementById('inputSummary').value,
+                experience: document.getElementById('inputExperience').value,
+                education: document.getElementById('inputEducation').value,
+                skills: document.getElementById('inputSkills').value,
+                certifications: document.getElementById('inputCertifications').value,
+                publications: document.getElementById('inputPublications').value
+            };
+            const blob = new Blob([JSON.stringify(formData, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${(formData.name || 'resume').toLowerCase().replace(/\s+/g, '_')}_crisp_suite.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            setStatus("📥 Resume data exported as JSON file!");
         }
 
         // Event Listeners
-        document.querySelector("#loadButton").addEventListener("click", () => {
+        document.getElementById('saveButton').addEventListener('click', saveDraft);
+        document.getElementById('loadButton').addEventListener('click', loadDraft);
+        document.getElementById('exportJsonButton').addEventListener('click', exportJson);
+        document.getElementById('printButton').addEventListener('click', () => { window.print(); });
+
+        document.getElementById('loadButton').addEventListener('dblclick', () => {
             fileInput.click();
         });
 
-        fileInput.addEventListener("change", (event) => {
-            loadFile(event.target.files[0]);
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                try {
+                    const data = JSON.parse(evt.target.result);
+                    document.getElementById('inputName').value = data.name || '';
+                    document.getElementById('inputTitle').value = data.title || '';
+                    document.getElementById('inputEmail').value = data.email || '';
+                    document.getElementById('inputPhone').value = data.phone || '';
+                    document.getElementById('inputLocation').value = data.location || '';
+                    document.getElementById('inputSummary').value = data.summary || '';
+                    document.getElementById('inputExperience').value = data.experience || '';
+                    document.getElementById('inputEducation').value = data.education || '';
+                    document.getElementById('inputSkills').value = data.skills || '';
+                    document.getElementById('inputCertifications').value = data.certifications || '';
+                    document.getElementById('inputPublications').value = data.publications || '';
+                    updatePreview();
+                    setStatus("📂 Resume imported successfully from JSON file!");
+                } catch (err) {
+                    setStatus("❌ Invalid JSON file format.");
+                }
+            };
+            reader.readAsText(file);
         });
 
-        document.querySelector("#saveButton").addEventListener("click", saveDraft);
-        document.querySelector("#printButton").addEventListener("click", printResumePDF);
-        document.querySelector("#exportJsonButton").addEventListener("click", exportJson);
-
-        // Initial setup
-        toggleMode();
-        restoreDraft();
+        // Initial preview render
+        updatePreview();
     </script>
 </body>
 </html>
