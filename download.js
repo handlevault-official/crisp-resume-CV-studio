@@ -1,5 +1,5 @@
 /**
- * download.js - Crisp Suite Utility
+ * download.js - Crisp Resume-CV-Studio
  */
 const DownloadUtils = {
   json(filename, data) {
